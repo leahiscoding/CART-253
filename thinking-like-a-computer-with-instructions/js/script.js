@@ -33,43 +33,44 @@ function setup() {
 function draw() {
     // The void
     background("#000000");
-   
+
     push();
-    noStroke ();
-    fill (255,0,0)
+    noStroke();
+    fill(255, 0, 0)
     // fill anything draws afterwards //
-    ellipse (20,20,20,20);
+    ellipse(20, 20, 20, 20);
     // function draw is automatic lead—going back to the top of the code and redoing it. //
     // loop is automatic and part of the draw function //
     // y increases as you go down, x increases as you go right //
     pop();
-   
+
     stroke(255)
     strokeWeight(4)
-    fill (0,0,255)
-    rect (100,100,50,30)
-// until I change the fill, it'll be the same colour //
-// I need to call fill before I draw //
-// When you're animating you're basically drawing the frame and clearing the frame–clearing the canvas and drawing it again. //
-// push and pop > grouping alike things together—saving the current state//
+    fill(0, 0, 255)
+    rect(100, 100, 50, 30)
+    // until I change the fill, it'll be the same colour //
+    // I need to call fill before I draw //
+    // When you're animating you're basically drawing the frame and clearing the frame–clearing the canvas and drawing it again. //
+    // push and pop > grouping alike things together—saving the current state//
 
-// make sure to open your console > to see errors //
+    // make sure to open your console > to see errors //
 
-// console.log > prints out to the console//
+    // console.log > prints out to the console//
     leahsfunction();
 
 
     // The eye
-   // drawEye();
+    // drawEye();
 }
 
-function leahsfunction(){
-    fill(80,15,230)
-    rect(200,300,80,60);
+function leahsfunction() {
+    fill(80, 15, 230)
+    rect(200, 300, 80, 60);
 
 }
 // every function has to have parenthesis //
 // the function is not defined, so I can't use it //
+// when we define our custom function, we need to give a definition // 
 
 
 // function draw is a loop. it will keep executing the code inside the function until you stop it //
