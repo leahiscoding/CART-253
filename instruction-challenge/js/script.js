@@ -52,12 +52,22 @@ function draw() {
         rotate(PI/3);
         fill(210,180,140);
         rect(0,0, 30, 200);
-        pop();
+        pop(); 
+
+        /* sabine's explanation
+        push();
+        translate(500,300);
+        rotate(radians(-30));
+        fill(210,180,0);
+        rect(0, 0, 30, 200);
+        pop(); */
 
 
     // grass
+    push();
     fill(37,112,122);
     rect(0, 400, 640, 80);
+    pop();
 
     // fingers
     push();
@@ -76,26 +86,36 @@ function draw() {
     pop();
 
     // house
+    push();
     fill(210,180,140);
     rect(220, 250, 200, 150);
+    pop();
 
     // roof
+    push();
     fill(87,65,55);
+    pop();
     //chimney
+    push();
     rect(220, 160, 40, 80)
     triangle(200, 250, 440, 250, 320, 150);
-
+    pop();
     // door
+    push();
     fill(105,48,59);
     rect(290, 320, 60, 80);
+    pop();  
     // door knob
+    push();
     fill(122,95,59);
     circle(340,360,10);
-
+    pop();
     // windows
+    push();
     fill(235,210, 36);
     rect(260, 280, 30, 30);
     rect(350, 280, 30, 30);
+    pop();
     
    
   
