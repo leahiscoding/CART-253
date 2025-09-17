@@ -2,11 +2,12 @@
  * Creating variables
  * Leah Song
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * Experimenting with creating variables
  */
 
 "use strict";
+
+let holeSize = 180;
 
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
@@ -27,6 +28,6 @@ function draw() {
     push();
     noStroke();
     fill(0);
-    ellipse(140,175,100);
+    ellipse(140,175,holeSize);
     pop();
 }
