@@ -6,19 +6,31 @@
  * on the canvas using their own circle.
  */
 
-const puck = {
+    const puck = {
     x: 200,
     y: 200,
     size: 100,
     fill: "#ff0000"
   };
   
-  const user = {
+    const user = {
     x: undefined, // will be mouseX
     y: undefined, // will be mouseY
     size: 75,
     fill: "#000000"
   };
+
+    const target = {
+    x: 30, 
+    y: 30,
+    size : 50,
+    fill: "#65FF00",
+    fills: {
+        noOverlap: "#65FF00",
+        overlap: "#A200FF"
+    }
+    };
+
   
   /**
    * Create the canvas
@@ -39,6 +51,9 @@ const puck = {
     // Draw the user and puck
     drawUser();
     drawPuck();
+    drawTarget();
+    movePuck();
+    checkTarget();
   }
   
   /**
@@ -70,3 +85,62 @@ const puck = {
     ellipse(puck.x, puck.y, puck.size);
     pop();
   }
+
+  function drawTarget() {
+    push();
+    noStroke();
+    fill(target.fill);
+    ellipse(target.x, target.y, target.size);
+    pop();
+  }
+
+   function movePuck() {
+     const d = dist (user.x, user.y, puck.x, puck.y);
+     // the distance between the centers of the circles are smaller than /2
+
+     const overlap = (d < user.size / 2 + puck.size / 2);
+     // d is distance
+     if (overlap && user.x > puck.x) {
+         puck.x = puck.x - 1;
+     }
+     else if (overlap && user.x < puck.x) {
+         puck.x = puck.x + 1;
+     }
+     if (overlap && user.y > puck.y) {
+         puck.y = puck.y - 1;
+     }
+     else if (overlap && user.y < puck.y) {
+         puck.y = puck.y + 1;
+   }
+}
+
+ function checkTarget(){
+        const d = dist (puck.x, puck.y, target.x, target.y)
+        // the distance between the centres of the puck and the target
+        const overlap = (d < puck.size / 2 + target.size / 2);
+     if (overlap) {
+        console.log(target.fill);
+        target.fill = target.fills.overlap;
+        } else {
+        target.fill = target.fills.noOverlap;
+    }
+ }
+
+//     // Calculate distance between user and puck
+//     let d = dist(user.x, user.y, puck.x, puck.y);
+    
+//     // Check if circles are overlapping
+//     if (d < (user.size / 2 + puck.size / 2)) {
+//       // Calculate angle of collision
+//       let angle = atan2(puck.y - user.y, puck.x - user.x);
+      
+//       // Move puck away from user circle
+//       let moveDistance = 5; // Distance to move the puck
+//       puck.x += cos(angle) * moveDistance;
+//       puck.y += sin(angle) * moveDistance;
+      
+//       // Constrain puck within canvas
+//       puck.x = constrain(puck.x, puck.size / 2, width - puck.size / 2);
+//       puck.y = constrain(puck.y, puck.size / 2, height - puck.size / 2);
+//     }
+//   }
