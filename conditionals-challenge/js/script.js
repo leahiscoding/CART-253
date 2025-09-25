@@ -126,21 +126,3 @@
     }
  }
 
-//     // Calculate distance between user and puck
-//     let d = dist(user.x, user.y, puck.x, puck.y);
-    
-//     // Check if circles are overlapping
-//     if (d < (user.size / 2 + puck.size / 2)) {
-//       // Calculate angle of collision
-//       let angle = atan2(puck.y - user.y, puck.x - user.x);
-      
-//       // Move puck away from user circle
-//       let moveDistance = 5; // Distance to move the puck
-//       puck.x += cos(angle) * moveDistance;
-//       puck.y += sin(angle) * moveDistance;
-      
-//       // Constrain puck within canvas
-//       puck.x = constrain(puck.x, puck.size / 2, width - puck.size / 2);
-//       puck.y = constrain(puck.y, puck.size / 2, height - puck.size / 2);
-//     }
-//   }
