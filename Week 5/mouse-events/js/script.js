@@ -45,12 +45,30 @@ function draw() {
     ellipse(ball.x, ball.y, ball.size);
     pop();
 }
+/**
+ * Starts the ball 
+ * */ 
 
 function mousePressed () {
     ball.velocity.x = ball.speed;
 
 }
+/**
+ * Stops the ball
+ * */ 
 
 function mouseReleased () {
     ball.velocity.x = 0;
 }
+/**
+ * increases the size of the ball
+ */
+function mouseWheel (event) {
+    if (event.delta > 0) 
+    // if the event is positive = mouse is scrolled up, the ball gets bigger
+    ball.size += 2;
+    else {
+        ball.size -= 2;
+    }
+}
+//receiving the parameter called event and inside of the event there's a bunch of information
