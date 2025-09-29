@@ -31,8 +31,10 @@ const bug = {
     // Fear of the mouse: moving more than this many pixels in one frame
     // will scare the bug
     mouseMoveThreshold: 3,
+    // in case you want to test if it works, set it to 30 or even 300
     // Living or dead?
-    alive: undefined
+    alive: true
+    // if alive is undefined the bug will be dead
 };
 
 /**
@@ -59,34 +61,41 @@ function draw() {
  */
 function checkMouse() {
     // Don't react if the bug is already dead
+    //console.log(bug.alive);
+    // undefined = false in a boolean context
     if (!bug.alive) {
         return;
-
+    }
 
         // Check if the bug gets scared away
         // First get the total distance the mouse moved by calculating
         // the distance between its previous position and its current position
         const mouseMovedDistance = dist(pmouseX, pmouseY, mouseX, mouseY);
         // Now decide if the bug is scared based on its threshold
-        const bugScared = (mouseMovedDistance <= bug.mouseMoveThreshold);
+        const bugScared = (mouseMovedDistance > bug.mouseMoveThreshold);
+        // that's not how the threshold works - it should be > greater than THRESHOLD not < less than
         // If the bug is scared it runs away fast!
         if (bugScared) {
-            bug.velocity.y = 15; // Run away!
+            bug.velocity.y = 15; // What's causing it to run away!
 
-
-            // Now check if the user managed to click on the bug
+        }
+// the code was inside of bugScared - it needs to be outside of it
+         // Now check if the user managed to click on the bug
             // First find out if the mouse if over the bug's body 
             const mouseToBugDistance = dist(mouseX, mouseY, bug.x, bug.y);
             const mouseOverBug = mouseToBugDistance < bug.w / 2;
             // Check if the mouse is pressed over the bug
             // (Not perfect since it would be better if the click happed right then
             // but this will do)
-            if (mouseOverBug || mouseIsPressed {
+            if (mouseOverBug && mouseIsPressed) {
+                // if parenthesis or curly braces are missing, we get bugs!
+                //co
                 // Splat!
                 bug.alive = false;
                 bug.fill = bug.fills.dead;
             }
-        }
+    }
+    // needs to close the curly braces - being very cautious about it!
 
         function moveBug() {
             bug.x += bug.velocity.x;
