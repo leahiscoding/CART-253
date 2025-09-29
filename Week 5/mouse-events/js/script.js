@@ -16,7 +16,7 @@ const ball = {
     size: 50,
     // Velocity so it can move
     velocity: {
-        x: 0,
+        x: 2,
         y: 0
     },
     // Speed when it moves
@@ -44,4 +44,13 @@ function draw() {
     push();
     ellipse(ball.x, ball.y, ball.size);
     pop();
+}
+
+function mousePressed () {
+    ball.velocity.x = ball.speed;
+
+}
+
+function mouseReleased () {
+    ball.velocity.x = 0;
 }
