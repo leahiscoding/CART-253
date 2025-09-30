@@ -1,8 +1,14 @@
 /**
- * Self-Portrait
+ * Self Portrait
  * Leah Song
  * 
- * A self-portrait made with raining glowy star (a.k.a stardrops)
+ * A self-portrait consist of glowy stardrops falling from the sky
+ * 
+ *
+ * Uses:
+ * p5.js
+ * https://p5js.org
+ * external codes are referenced in the code
  */
 
 "use strict";
@@ -11,7 +17,9 @@
 
 let starDropGroup = []
 
-
+/**
+ * Canvas setup
+*/
 function setup(){
 // create canvas for stardrops
     createCanvas(1000, 600);
@@ -39,7 +47,7 @@ function setup(){
 }
 
 /**
- * Canvas setup
+ * Draw functions to call other functions
 */
 function draw() {
     background(0);
@@ -53,7 +61,9 @@ function draw() {
     moveStarDrop();
 }
 
-// action: make raindrop
+/**
+ * Defining the drawStarDrop function
+*/
 function drawStarDrop() {
 
 //for loop - for each rainDrop in the group draw each one
@@ -71,6 +81,9 @@ function drawStarDrop() {
     }
 }
 
+/**
+ * Defining the moveStarDrop function
+*/
 function moveStarDrop() {
 //for loop - for each rainDrop in the group move each one
     for(let position = 0 ; position<200 ; position=position+1)
@@ -92,6 +105,9 @@ function moveStarDrop() {
     }
 }
 
+/**
+ * Defining the star function
+*/
 // source:https://stackoverflow.com/questions/62893486/what-is-the-math-behind-creation-of-a-star-in-p5js?noredirect=1&lq=1
 function star(x, y, radius1, radius2, npoints) {
     let angle = TWO_PI / npoints;
