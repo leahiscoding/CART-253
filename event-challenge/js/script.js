@@ -71,3 +71,21 @@ function keyReleased(){
     lose ();
 }
 
+function mouseIsPressed ()
+{
+    lose ();
+}
+
+function mouseReleased(){
+    lose ();
+}
+
+function mouseWheel() {
+    lose ();
+}
+
+function mouseMoved (){
+    lose ();
+}
+
+
