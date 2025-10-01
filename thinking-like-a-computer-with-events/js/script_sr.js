@@ -6,6 +6,7 @@
 */
 
 "use strict";
+
 // this area is called the global scope
 let face = {
         x: 0, 
@@ -137,3 +138,6 @@ function keyPressed(event){
 
 // arguments inside of function 
 /* (event) > event argument is inside of the function */
+
+// try to do things in small chunks and make a small list of things for yourself that you want to do
+// make sure what is needed
