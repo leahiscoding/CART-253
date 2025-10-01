@@ -32,3 +32,5 @@ function draw() {
 function mousePressed() {
     background("pink");
 }
+
+// don't need to stick to p5 for events—I can always venture out with vanilla JS
