@@ -87,5 +87,8 @@ function mouseWheel() {
 function mouseMoved (){
     lose ();
 }
-
-
+window.addEventListener ('offline', () => {
+    lose();
+    // all it does is calling lose but you can add console
+});
+// lambda function => calling a function and inside the function you're defining another function
