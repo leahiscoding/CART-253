@@ -86,14 +86,14 @@ window.addEventListener("mouseup",function(){
 //     lose ();
 // }
 // // loses when the mouse wheel is moved
-window.addEventListener("mousemove",function(){
+window.addEventListener("wheel",function(){
     lose ();
 })
 // function mouseWheel() {
 //     lose ();
 // }
 // // loses when the mouse is moved
-window.addEventListener("wheel",function(){
+window.addEventListener("mousemove",function(){
     lose ();
 })
 // function mouseMoved (){
