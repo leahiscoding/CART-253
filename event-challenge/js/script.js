@@ -92,3 +92,10 @@ window.addEventListener ('offline', () => {
     // all it does is calling lose but you can add console
 });
 // lambda function => calling a function and inside the function you're defining another function
+
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        // document means our program > javascript and it's running in window and whenever we close the window the javascript is also being hidden
+        lose ();
+    }
+});
