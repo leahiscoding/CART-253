@@ -67,31 +67,43 @@ function lose()
     gameOver = true
 }
 // loses when you press the key
-function keyReleased(){
+window.addEventListener("keyup",function(){
     lose ();
-}
-// loses when the mouse is pressed
-function mouseIsPressed ()
-{
+})
+// function keyReleased(){
+//     lose ();
+// }
+// // loses when the mouse is pressed
+window.addEventListener("mouseup",function(){
     lose ();
-}
-// loses when the mouse is released
-function mouseReleased(){
+})
+// function mouseIsPressed ()
+// {
+//     lose ();
+// }
+// // loses when the mouse is released
+// function mouseReleased(){
+//     lose ();
+// }
+// // loses when the mouse wheel is moved
+window.addEventListener("mousemove",function(){
     lose ();
-}
-// loses when the mouse wheel is moved
-function mouseWheel() {
+})
+// function mouseWheel() {
+//     lose ();
+// }
+// // loses when the mouse is moved
+window.addEventListener("wheel",function(){
     lose ();
-}
-// loses when the mouse is moved
-function mouseMoved (){
-    lose ();
-}
-window.addEventListener ('offline', () => {
-    lose();
-    // all it does is calling lose but you can add console
-});
-// lambda function => calling a function and inside the function you're defining another function
+})
+// function mouseMoved (){
+//     lose ();
+// }
+// window.addEventListener ('offline', () => {
+//     lose();
+//     // all it does is calling lose but you can add console
+// });
+// // lambda function => calling a function and inside the function you're defining another function
 
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
