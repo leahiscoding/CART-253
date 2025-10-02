@@ -61,29 +61,29 @@ function displayScore() {
   pop();
 }
 
-
+// define the function
 function lose()
 {
     gameOver = true
 }
-
+// loses when you press the key
 function keyReleased(){
     lose ();
 }
-
+// loses when the mouse is pressed
 function mouseIsPressed ()
 {
     lose ();
 }
-
+// loses when the mouse is released
 function mouseReleased(){
     lose ();
 }
-
+// loses when the mouse wheel is moved
 function mouseWheel() {
     lose ();
 }
-
+// loses when the mouse is moved
 function mouseMoved (){
     lose ();
 }
