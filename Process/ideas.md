@@ -15,4 +15,10 @@ etc.
 # Mod Jam Ideas
 
 1. There are pesticides flying around alongside with flies
-2. There are two (or more) frogs moving around to compete with 
+2. There are two (or more) frogs 
+3. Frog is an actually a mouse and flies are cheese
+4. There are bones flying around and if the frog gets hit by the bones the frog will die
+5. There wil be bombs and the frog has to dodge it
+6. If the frog misses more than 10 files then the game will be over
+7. Frog can not only move horizontally but vertically
+8. 
