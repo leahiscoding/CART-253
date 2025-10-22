@@ -31,12 +31,8 @@ function draw() {
  * Draws a Trisolarian sun
  */
 function drawSun(x, y, size) {
-    // Calculate the stroke weight of the sun based on
-    // the distance of the mouse position
-    const minWeight = 20;
-    const maxWeight = 1;
-    let d = dist(mouseX, mouseY, x, y);
-    let weight = map(d, 0, width, minWeight, maxWeight);
+   let weight = calculateStrokeWeight(x, y);
+   // function that exists here to calculate the st
 
     push();
     strokeWeight(weight);
@@ -44,4 +40,21 @@ function drawSun(x, y, size) {
     fill("#f99736");
     ellipse(x, y, size);
     pop();
+}
+
+function calculateStrokeWeight(x, y) {
+     // Calculate the stroke weight of the sun based on
+    // the distance of the mouse position
+    const minWeight = 1;
+    const maxWeight = 20;
+    // calculate distance between the position of mouse x and y and the x and y of the sun
+    let d = dist(mouseX, mouseY, x, y);
+    // it uses the distance of pythagoran theorem to calculate the distance between two points
+    let result = map(d, 0, width, maxWeight, minWeight);
+    // infromation we want to give back to the user
+
+    return result;
+    // this is how to give information back
+    
+    
 }
