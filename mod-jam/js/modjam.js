@@ -31,6 +31,7 @@ function setup() {
     startScreen();
 }
 
+// Draw function to switch between game states
 function draw (){
     if (gameState === "start"){
         startScreen();
@@ -72,7 +73,7 @@ function gameScreen (){
     drawFrog();
 }
 
-
+//Draw the frog
 function drawFrog(){
     push();
     fill("#66FF33");
@@ -81,6 +82,7 @@ function drawFrog(){
     pop();
 }
 
+//Move the frog according to the arrow keys
 function moveFrog() {
     if (keyIsDown (LEFT_ARROW) === true){
         frog.x = frog.x - 5;
