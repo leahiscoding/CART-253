@@ -13,8 +13,19 @@
  * https://p5js.org/
  */
 "use strict";
-//set up canvas
+//Set up canvas
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(800, 500);
+    startScreen();
+}
 
+//Start screen
+function startScreen (){
+    background (0);
+    fill (255);
+    textAlign (CENTER);
+    textSize (32);
+    text ("Space Frog", width/2, height/2 - 40);
+    textSize (16);
+    text ("Press SPACE to start game", width/2, height/2+80);
 }
