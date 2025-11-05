@@ -86,16 +86,16 @@ function drawFrog(){
 function moveFrog() {
     if (keyIsDown (LEFT_ARROW) === true){
         frog.x = frog.x - 5;
-    }
+    } //left arrow moves frog to left  
     if (keyIsDown (RIGHT_ARROW) === true){
         frog.x = frog.x + 5;
-    }
+    } // right arrow move frog to right
     if (keyIsDown (DOWN_ARROW) === true){
         frog.y = frog.y + 5;
-    }
+    } // down arrow moves frog down
     if (keyIsDown (UP_ARROW) === true){
         frog.y = frog.y - 5;
-    }
+    } // up arrow moves frog up
     frog.x = constrain(frog.x, 0, width - frog.size);
     frog.y = constrain(frog.y, 0, height - frog.size);
 }
