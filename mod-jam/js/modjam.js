@@ -21,8 +21,9 @@ let score = 0;
 let frog = {
     x: 400,
     y: 550,
-    size: 30
-
+    size: 30,
+    velocityX: 5,
+    velocityY: 5,
 };
 
 //Set up canvas
@@ -43,7 +44,9 @@ function draw (){
     else if (gameState === "end"){
         endScreen();
     }
+
 }
+
 
 
 //Start screen
@@ -71,6 +74,7 @@ function gameScreen (){
     background (0);
     fill("#66FF33");
     drawFrog();
+    
 }
 
 //Draw the frog
@@ -85,16 +89,16 @@ function drawFrog(){
 //Move the frog according to the arrow keys
 function moveFrog() {
     if (keyIsDown (LEFT_ARROW) === true){
-        frog.x = frog.x - 5;
+        frog.x = frog.x - frog.velocityX;
     } //left arrow moves frog to left  
     if (keyIsDown (RIGHT_ARROW) === true){
-        frog.x = frog.x + 5;
+        frog.x = frog.x + frog.velocityX;
     } // right arrow move frog to right
     if (keyIsDown (DOWN_ARROW) === true){
-        frog.y = frog.y + 5;
+        frog.y = frog.y + frog.velocityY;
     } // down arrow moves frog down
     if (keyIsDown (UP_ARROW) === true){
-        frog.y = frog.y - 5;
+        frog.y = frog.y - frog.velocityY;
     } // up arrow moves frog up
     frog.x = constrain(frog.x, 0, width - frog.size);
     frog.y = constrain(frog.y, 0, height - frog.size);
