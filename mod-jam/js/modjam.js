@@ -21,14 +21,31 @@ let score = 0;
 let frog = {
     x: 400,
     y: 550,
-    size: 30,
+    size: 80,
     velocityX: 5,
     velocityY: 5,
 };
 
+//Game control
+let stage = 0;
+
+// Multimedia:
+let spacekermit1;
+let spacekermit2;
+let spacekermit3;
+
+// Preload multimedia
+function preload(){
+    spacekermit1 = loadImage ("assets/images/spacekermit1.webp");
+    spacekermit2 = loadImage ("assets/images/spacekermit2.webp");
+}
+
+
+
 //Set up canvas
 function setup() {
     createCanvas(800, 600);
+    imageMode(CENTER);
     startScreen();
 }
 
@@ -54,11 +71,15 @@ function startScreen () {
     background (0);
     textAlign (CENTER);
     textFont('Courier New');
-    textSize (32);
+    textStyle(BOLD);
     fill("#66FF33");
-    text ("Space FrogFrogFrog", width/2, height/2 - 40);
+    stroke(150);
+    strokeWeight(5);
+    textSize (49);
+    text ("Space Frog!Frog!Frog!", width/2, height/2-50);
     textSize (16);
-    text ("Press SPACE to start game", width/2, height/2+80);
+    text ("Press SPACE to start game", width/2, height/2+25);
+    image (spacekermit1, width/2+245, height/2 + 150, 300, 300);
 }
 
 // Press space to start game
@@ -71,10 +92,12 @@ function keyPressed() {
 
 //game screen
 function gameScreen (){
+    push();
     background (0);
     fill("#66FF33");
     drawFrog();
-    
+    moveFrog();
+    pop();
 }
 
 //Draw the frog
@@ -82,8 +105,10 @@ function drawFrog(){
     push();
     fill("#66FF33");
     noStroke();
-    square (frog.x, frog.y, frog.size);
+    //square (frog.x, frog.y, frog.size);
+    image (spacekermit2, frog.x, frog.y, frog.size, frog.size);
     pop();
+    
 }
 
 //Move the frog according to the arrow keys
@@ -100,6 +125,6 @@ function moveFrog() {
     if (keyIsDown (UP_ARROW) === true){
         frog.y = frog.y - frog.velocityY;
     } // up arrow moves frog up
-    frog.x = constrain(frog.x, 0, width - frog.size);
-    frog.y = constrain(frog.y, 0, height - frog.size);
+    frog.x = constrain(frog.x, 0, width-50);
+    frog.y = constrain(frog.y, 0, height-50);
 }
