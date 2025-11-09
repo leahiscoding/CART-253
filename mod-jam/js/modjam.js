@@ -115,10 +115,16 @@ function startScreen () {
 function keyPressed() {
     if (gameState === "start" && key === " ") {
         gameState = "play";
-        fire = false;
+        fireintent = false;
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
+        return; //Sabine I don't understand why return should be added here
+    }
+
+    if (gameState === "play" && key === " " && rocket.position === 0) {
+        fireintent = true;
+        rocket.position = 1; // set rocket position to moving
         return;
     }
     
@@ -166,8 +172,8 @@ function moveFrog() {
     if (keyIsDown (UP_ARROW) === true){
         frog.y = frog.y - frog.velocityY;
     } // up arrow moves frog up
-    // frog.x = constrain(frog.x, 0, width - frog.size);
-    // frog.y = constrain(frog.y, 0, height - frog.size);
+    frog.x = constrain(frog.x, 0 + frog.size/3, width - frog.size/3);
+    frog.y = constrain(frog.y, 0+ frog.size/3, height - frog.size/3);
 }
 
 function drawRocket(){ 
@@ -179,12 +185,6 @@ function drawRocket(){
     pop();
 }
 function shootRocket(){
-// rocket position
-    // 0 = frog ready to fire
-    // 1 = rocket is moving
-
-// draw rocket
-  
 
 // keep track and fire rockets
     if (rocket.position === 0){ {
@@ -193,7 +193,7 @@ function shootRocket(){
     }
     } // if fire is true and rocket position is 0, rocket position becomes 1 and rocket starts at frog position
 
-    if (rocket.position === 1){
+    if (fireintent = true && rocket.position === 1){
         rocket.y -= rocket.speed;
     } // if rocket position is 1, rocket moves up
 
@@ -216,7 +216,7 @@ function drawFly() {
 }
 
 function drawFlygroup() {
-    for (let i = 0; i < 200; i++){
+    for (let i = 0; i < 20; i++){
         push();
         noStroke();
         fill(255);
@@ -226,7 +226,7 @@ function drawFlygroup() {
 }
 
 function moveFlygroup(){
-    for (let i = 0; i < 200; i++){
+    for (let i = 0; i < 20; i++){
         flygroup[i].x += flygroup[i].speed;
         if (flygroup[i].x > width){
             flygroup[i].x = 0;
@@ -253,16 +253,17 @@ function resetFly() {
 }
 
 function checkRocketHit (){
-    let d = dist (rocket.x, rocket.y, fly.x, fly.y);
-    // check if distance is less than sum of radii
-    const rocketRadiusFly = (d <= rocket.size/2 + fly.size/2)
-    if (rocketRadiusFly){
-        fly.y = -1000; // move fly off screen
-        resetFly();
+    for (let i = 0; i < 20; i++){
+        const rocketRadiusFly = dist (rocket.x, rocket.y, flygroup[i].x, flygroup[i].y);
+        // calculate the distance
+        if (rocketRadiusFly){
+            fly.y = -1000; // move fly off screen
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
         score++;
+
+        }
     }
    
 }
