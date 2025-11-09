@@ -18,6 +18,7 @@
 let gameState = "start";
 let finishState = "end";
 let score = 0;
+let fireintent = false;
 
 // Game objects
 let frog = {
@@ -42,6 +43,7 @@ let fly = {
     size: 10,
     speed: 5
 }
+let flygroup = [];
 
 //Game control
 let stage = 0;
@@ -65,6 +67,15 @@ function setup() {
     createCanvas(800, 600);
     imageMode(CENTER);
     startScreen();
+    // initialize fly position
+    for (let flyCounter = 0; flyCounter < 200; flyCounter += 1){
+        flygroup.push({
+            x: random (0, width),
+            y: random (0 + frog.size, height - frog.size),
+            size: 10,
+            speed: random (2, 6)
+        });
+    }
 }
 
 // Draw function to switch between game states
@@ -96,7 +107,7 @@ function startScreen () {
     textSize (49);
     text ("Space Frog!Frog!Frog!", width/2, height/2-50);
     textSize (16);
-    text ("Press ENTER to start game", width/2, height/2+25);
+    text ("Press SPACE to start game", width/2, height/2+25);
     image (spacekermit1, width/2+245, height/2 + 150, 300, 300);
 }
 
@@ -118,13 +129,15 @@ function gameScreen (){
     push();
     background (0);
     fill("#66FF33");
-    moveFly();
+    //moveFly();
     drawFly();
     drawRocket();
     drawFrog();
     moveFrog();
     shootRocket();
     checkRocketHit();
+    drawFlygroup();
+    moveFlygroup();
     pop();
 }
 
@@ -192,14 +205,7 @@ function shootRocket(){
     
 }
 
-function keyTyped (){
-    if (gameState === "play" && key === " " && rocket.position === 0){
-        rocket.position = 1;
-    } // if we press space, fire is true
-    else {
-        rocket.position = 0;
-    } // if we press any other key, fire is false
-}
+
 
 function drawFly() {
     push();
@@ -209,14 +215,34 @@ function drawFly() {
     pop();
 }
 
-function moveFly() {
-    // Move the fly
-    fly.x += fly.speed;
-    // Handle the fly going off the canvas
-    if (fly.x > width) {
-        resetFly();
+function drawFlygroup() {
+    for (let i = 0; i < 200; i++){
+        push();
+        noStroke();
+        fill(255);
+        ellipse(flygroup[i].x, flygroup[i].y, flygroup[i].size);
+        pop();  
     }
 }
+
+function moveFlygroup(){
+    for (let i = 0; i < 200; i++){
+        flygroup[i].x += flygroup[i].speed;
+        if (flygroup[i].x > width){
+            flygroup[i].x = 0;
+            flygroup[i].y = random(0 + frog.size, height - frog.size);
+        }
+    }
+}
+
+// function moveFly() {
+//     // Move the fly
+//     fly.x += fly.speed;
+//     // Handle the fly going off the canvas
+//     if (fly.x > width) {
+//         resetFly();
+//     }
+// }
 
 /**
  * Resets the fly to the left with a random y
@@ -240,3 +266,4 @@ function checkRocketHit (){
     }
    
 }
+
