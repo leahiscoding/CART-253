@@ -111,9 +111,6 @@ function keyPressed() {
         return;
     }
     
-    if (gameState === "play" && key === " " && rocket.position === 0) {
-        fire = true;
-    }
 }
 
 //game screen
@@ -127,6 +124,7 @@ function gameScreen (){
     drawFrog();
     moveFrog();
     shootRocket();
+    checkRocketHit();
     pop();
 }
 
@@ -162,6 +160,8 @@ function moveFrog() {
 function drawRocket(){ 
     push();
     fill(255, 0, 0);
+    drawingContext.shadowBlur = 10;
+    drawingContext.shadowColor = color(255, 255, 255);
     image (laser, rocket.x, rocket.y, rocket.size, rocket.size);
     pop();
 }
@@ -224,4 +224,19 @@ function moveFly() {
 function resetFly() {
     fly.x = 0
     fly.y = random(0+frog.size , height-frog.size);
+}
+
+function checkRocketHit (){
+    let d = dist (rocket.x, rocket.y, fly.x, fly.y);
+    // check if distance is less than sum of radii
+    const rocketRadiusFly = (d <= rocket.size/2 + fly.size/2)
+    if (rocketRadiusFly){
+        fly.y = -1000; // move fly off screen
+        resetFly();
+        rocket.position = 0;
+        rocket.x = frog.x;
+        rocket.y = frog.y;
+        score++;
+    }
+   
 }
