@@ -18,6 +18,8 @@
 let gameState = "start";
 let finishState = "end";
 let score = 0;
+
+// Game objects
 let frog = {
     x: 400,
     y: 550,
@@ -33,6 +35,13 @@ let rocket = {
     speed: 30,
 };
 let fire = false;
+
+let fly = {
+    x: 0,
+    y: 0, // Will be random
+    size: 10,
+    speed: 5
+}
 
 //Game control
 let stage = 0;
@@ -93,7 +102,7 @@ function startScreen () {
 
 // Press space to start game
 function keyPressed() {
-    if (gameState === "start" && keyCode === ENTER) {
+    if (gameState === "start" && key === " ") {
         gameState = "play";
         fire = false;
         rocket.position = 0;
@@ -112,6 +121,8 @@ function gameScreen (){
     push();
     background (0);
     fill("#66FF33");
+    moveFly();
+    drawFly();
     drawRocket();
     drawFrog();
     moveFrog();
@@ -188,4 +199,29 @@ function keyTyped (){
     else {
         rocket.position = 0;
     } // if we press any other key, fire is false
+}
+
+function drawFly() {
+    push();
+    noStroke();
+    fill(255);
+    ellipse(fly.x, fly.y, fly.size);
+    pop();
+}
+
+function moveFly() {
+    // Move the fly
+    fly.x += fly.speed;
+    // Handle the fly going off the canvas
+    if (fly.x > width) {
+        resetFly();
+    }
+}
+
+/**
+ * Resets the fly to the left with a random y
+ */
+function resetFly() {
+    fly.x = 0
+    fly.y = random(0+frog.size , height-frog.size);
 }
