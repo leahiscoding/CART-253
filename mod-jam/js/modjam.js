@@ -18,7 +18,14 @@
 let gameState = "start";
 let finishState = "end";
 let score = 0;
-let fireintent = false;
+
+// Timer object
+let timer =  { 
+    startTime:0,
+    timePassed:0,
+    timeInterval:20000
+}
+
 
 // Game objects
 let frog = {
@@ -33,20 +40,24 @@ let rocket = {
     y: frog.y,
     position: 0, // keep track of where the projectile currently is
     size: 20,
-    speed: 30,
+    speed: 35,
 };
 let fire = false;
 
 let fly = {
     x: 0,
-    y: 0, // Will be random
-    size: 10,
-    speed: 5
+    y: 0, 
+    size: 20,
+    speed: 10
 }
 let flygroup = [];
 
 //Game control
+let fireintent = false;
 let stage = 0;
+let flyNumbers = 20;
+let flyCaught = 0;
+let kermitHit = 0;
 
 // Multimedia:
 let spacekermit1;
@@ -59,9 +70,8 @@ function preload(){
     spacekermit1 = loadImage ("assets/images/spacekermit1.webp");
     spacekermit2 = loadImage ("assets/images/spacekermit2.webp");
     laser = loadImage ("assets/images/laser.png");
-    asteroid = loadImage ("assets/images/asteroid.webp");
+    asteroid = loadImage ("assets/images/asteroid.png");
 }
-
 
 
 //Set up canvas
@@ -73,9 +83,9 @@ function setup() {
     for (let flyCounter = 0; flyCounter < 20; flyCounter += 1){
         flygroup.push({
             x: random (0, width),
-            y: random (0 + frog.size, height - frog.size),
-            size: 10,
-            speed: random (2, 6)
+            y: random (0 + frog.size/3, height - frog.size),
+            size: random (5,25),
+            speed: random (2, 10)
         });
     }
 }
@@ -84,14 +94,14 @@ function setup() {
 function draw (){
     if (gameState === "start"){
         startScreen();
-    }
+    } // if game state is start, show start screen
     else if (gameState === "play"){
         gameScreen();
         moveFrog();
-    }
+    } // if game state is play, show game screen
     else if (gameState === "end"){
         endScreen();
-    }
+    } // if gane state is end, show end screen
 
 }
 
@@ -120,7 +130,7 @@ function keyPressed() {
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
-        return; //Sabine I don't understand why return should be added here
+        return; //add return so that the rest of the function doesn't run
     }
 
     if (gameState === "play" && key === " " && rocket.position === 0) {
@@ -136,18 +146,35 @@ function gameScreen (){
     push();
     background (0);
     fill("#66FF33");
-    //moveFly();
-    drawFly();
     drawRocket();
     drawFrog();
     moveFrog();
     shootRocket();
     checkRocketHit();
+    checkFrogHit(); 
     drawFlygroup();
     moveFlygroup();
+    ProgressBar();
+    displayTimer ();
     pop();
-}
 
+    timer.timePassed = millis () - timer.startTime;
+    if (timer.timePassed > timer.timeInterval) {
+        gameState = "end"
+        if (score =20) {
+            finishState = "win"
+        }
+        else {
+            finishState = "lose"
+        }
+    }
+
+}
+//Timer
+function startGame (){
+    gameState = "play";
+    timer.startTime = millis ();
+}
 //Draw the frog
 function drawFrog(){
     push();
@@ -177,6 +204,7 @@ function moveFrog() {
     frog.y = constrain(frog.y, 0+ frog.size/3, height - frog.size/3);
 }
 
+// Draw the rocket
 function drawRocket(){ 
     push();
     fill(255, 0, 0);
@@ -187,7 +215,7 @@ function drawRocket(){
 }
 function shootRocket(){
 
-// keep track and fire rockets
+// Keep track and fire rockets
     if (rocket.position === 0){ {
         rocket.x = frog.x;
         rocket.y = frog.y;
@@ -207,52 +235,37 @@ function shootRocket(){
 }
 
 
-
-function drawFly() {
-    push();
-    noStroke();
-    fill(255);
-    image(asteroid,fly.x, fly.y, fly.size);
-    pop();
-}
-
+// Draw flies using a for loop
 function drawFlygroup() {
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < 18; i++){
         push();
         noStroke();
         fill(255);
-        image(asteroid, flygroup[i].x, flygroup[i].y, flygroup[i].size);
+        image(asteroid, flygroup[i].x, flygroup[i].y, flygroup[i].size, flygroup[i].size);
         pop();  
     }
 }
 
+// Move flies using a for loop
 function moveFlygroup(){
     for (let i = 0; i < 20; i++){
         flygroup[i].x += flygroup[i].speed;
         if (flygroup[i].x > width){
             flygroup[i].x = 0;
-            flygroup[i].y = random(0 + frog.size, height - frog.size);
+            flygroup[i].y = random(0 + frog.size/2, height - frog.size);
         }
     }
 }
 
-// function moveFly() {
-//     // Move the fly
-//     fly.x += fly.speed;
-//     // Handle the fly going off the canvas
-//     if (fly.x > width) {
-//         resetFly();
-//     }
+/**
+//  * Resets the fly to the left with a random y - Pippin's function
+//  */
+// function resetFly() {
+//     fly.x = 0
+//     fly.y = random(0+frog.size , height-frog.size);
 // }
 
-/**
- * Resets the fly to the left with a random y
- */
-function resetFly() {
-    fly.x = 0
-    fly.y = random(0+frog.size , height-frog.size);
-}
-
+// Check if rocket hits flies
 function checkRocketHit (){
 
     if (rocket.position !== 1)return; // only check for hits if rocket is moving
@@ -265,6 +278,7 @@ function checkRocketHit (){
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
+        flyCaught++;
         score++;
     
         }
@@ -272,3 +286,84 @@ function checkRocketHit (){
    
 }
 
+// Check if frog gets hit by the fly
+function checkFrogHit (){
+    for (let i = 0; i < 20; i++){
+        const frogRadiusFly = dist (frog.x, frog.y, flygroup[i].x, flygroup[i].y);
+        // calculate the distance
+        if (frogRadiusFly <= frog.size/2 + flygroup[i].size/2){
+            flygroup[i].y = -1000; // move fly off screen
+        kermitHit++;
+         if(flyCaught>0)
+        flyCaught--;
+        score--;
+    
+        }
+    }
+}
+
+// Progress Bar
+function ProgressBar (){
+    push();
+    fill (255);
+    rect (50,50,700,20);
+    fill (0,255,0);
+    let progress = map (flyCaught, 0, flyNumbers, 0, 700);
+    flyCaught = constrain (flyCaught, 0, 20);
+    rect (50,50,progress,20);
+    pop();
+
+}
+
+function displayTimer () {
+    push();
+    textSize(24)    
+    fill(255);
+    noStroke();
+    text(floor(timer.timePassed/1000),width-30,30)
+    pop();
+}
+
+
+
+// End screen
+function endScreen () {
+    background ("#000000");
+    textAlign (CENTER);
+    textFont('Courier New');
+    textStyle(BOLD);
+    fill("#66FF33");
+    stroke(150);
+    strokeWeight(5);
+    textSize (49);
+    if (finishState === "win"){
+        text ("You Win!", width/2, height/2-50);
+    }
+    else if (finishState === "lose"){
+        text ("You Lose!", width/2, height/2-50);
+    }
+    textSize (16);
+    text ("Refresh to play again", width/2, height/2+25);
+}
+
+// function drawProgressBar() {
+//     // Outer bar
+//     push();
+//     stroke("#ce2a4d");
+//     strokeWeight(12);
+//     fill("#ce2a4d");
+//     rect(bar.x, bar.y, bar.w, bar.h, 30);
+//     pop();
+  
+//     // Fill progress
+//     let progress = map(bugsCaught, 0, totalBugs, 0, bar.w);
+  
+//     // Smoothly move toward target
+//     animatedProgress = lerp(animatedProgress, progress, 0.1);
+  
+//     noStroke();
+//     fill("##ffffff");
+//     rect(bar.x, bar.y, animatedProgress, bar.h, 30);
+  
+//     // Optional: text above bar
+//   }
