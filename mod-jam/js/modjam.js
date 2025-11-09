@@ -25,6 +25,14 @@ let frog = {
     velocityX: 5,
     velocityY: 5,
 };
+let rocket = {
+    x: frog.x,
+    y: frog.y,
+    position: 0, // keep track of where the projectile currently is
+    size: 20,
+    speed: 30,
+};
+let fire = false;
 
 //Game control
 let stage = 0;
@@ -32,12 +40,13 @@ let stage = 0;
 // Multimedia:
 let spacekermit1;
 let spacekermit2;
-let spacekermit3;
+let laser;
 
 // Preload multimedia
 function preload(){
     spacekermit1 = loadImage ("assets/images/spacekermit1.webp");
     spacekermit2 = loadImage ("assets/images/spacekermit2.webp");
+    laser = loadImage ("assets/images/laser.png");
 }
 
 
@@ -78,16 +87,24 @@ function startScreen () {
     textSize (49);
     text ("Space Frog!Frog!Frog!", width/2, height/2-50);
     textSize (16);
-    text ("Press SPACE to start game", width/2, height/2+25);
+    text ("Press ENTER to start game", width/2, height/2+25);
     image (spacekermit1, width/2+245, height/2 + 150, 300, 300);
 }
 
 // Press space to start game
 function keyPressed() {
-    if (gameState === "start" && key === " ") {
+    if (gameState === "start" && keyCode === ENTER) {
         gameState = "play";
+        fire = false;
+        rocket.position = 0;
+        rocket.x = frog.x;
+        rocket.y = frog.y;
+        return;
     }
     
+    if (gameState === "play" && key === " " && rocket.position === 0) {
+        fire = true;
+    }
 }
 
 //game screen
@@ -95,8 +112,10 @@ function gameScreen (){
     push();
     background (0);
     fill("#66FF33");
+    drawRocket();
     drawFrog();
     moveFrog();
+    shootRocket();
     pop();
 }
 
@@ -125,6 +144,48 @@ function moveFrog() {
     if (keyIsDown (UP_ARROW) === true){
         frog.y = frog.y - frog.velocityY;
     } // up arrow moves frog up
-    frog.x = constrain(frog.x, 0, width-50);
-    frog.y = constrain(frog.y, 0, height-50);
+    // frog.x = constrain(frog.x, 0, width - frog.size);
+    // frog.y = constrain(frog.y, 0, height - frog.size);
+}
+
+function drawRocket(){ 
+    push();
+    fill(255, 0, 0);
+    image (laser, rocket.x, rocket.y, rocket.size, rocket.size);
+    pop();
+}
+function shootRocket(){
+// rocket position
+    // 0 = frog ready to fire
+    // 1 = rocket is moving
+
+// draw rocket
+  
+
+// keep track and fire rockets
+    if (rocket.position === 0){ {
+        rocket.x = frog.x;
+        rocket.y = frog.y;
+    }
+    } // if fire is true and rocket position is 0, rocket position becomes 1 and rocket starts at frog position
+
+    if (rocket.position === 1){
+        rocket.y -= rocket.speed;
+    } // if rocket position is 1, rocket moves up
+
+    if (rocket.y <= 0){
+        rocket.position = 0;
+        rocket.x = frog.x;
+        rocket.y = frog.y;
+    } // if rocket goes off screen, reset to frog position and rocket position becomes 0
+    
+}
+
+function keyTyped (){
+    if (gameState === "play" && key === " " && rocket.position === 0){
+        rocket.position = 1;
+    } // if we press space, fire is true
+    else {
+        rocket.position = 0;
+    } // if we press any other key, fire is false
 }
