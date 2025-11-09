@@ -52,12 +52,14 @@ let stage = 0;
 let spacekermit1;
 let spacekermit2;
 let laser;
+let asteroid;
 
 // Preload multimedia
 function preload(){
     spacekermit1 = loadImage ("assets/images/spacekermit1.webp");
     spacekermit2 = loadImage ("assets/images/spacekermit2.webp");
     laser = loadImage ("assets/images/laser.png");
+    asteroid = loadImage ("assets/images/asteroid.webp");
 }
 
 
@@ -68,7 +70,7 @@ function setup() {
     imageMode(CENTER);
     startScreen();
     // initialize fly position
-    for (let flyCounter = 0; flyCounter < 200; flyCounter += 1){
+    for (let flyCounter = 0; flyCounter < 20; flyCounter += 1){
         flygroup.push({
             x: random (0, width),
             y: random (0 + frog.size, height - frog.size),
@@ -115,7 +117,6 @@ function startScreen () {
 function keyPressed() {
     if (gameState === "start" && key === " ") {
         gameState = "play";
-        fireintent = false;
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
@@ -193,7 +194,7 @@ function shootRocket(){
     }
     } // if fire is true and rocket position is 0, rocket position becomes 1 and rocket starts at frog position
 
-    if (fireintent = true && rocket.position === 1){
+    if (rocket.position === 1){
         rocket.y -= rocket.speed;
     } // if rocket position is 1, rocket moves up
 
@@ -211,7 +212,7 @@ function drawFly() {
     push();
     noStroke();
     fill(255);
-    ellipse(fly.x, fly.y, fly.size);
+    image(asteroid,fly.x, fly.y, fly.size);
     pop();
 }
 
@@ -220,7 +221,7 @@ function drawFlygroup() {
         push();
         noStroke();
         fill(255);
-        ellipse(flygroup[i].x, flygroup[i].y, flygroup[i].size);
+        image(asteroid, flygroup[i].x, flygroup[i].y, flygroup[i].size);
         pop();  
     }
 }
@@ -253,16 +254,19 @@ function resetFly() {
 }
 
 function checkRocketHit (){
+
+    if (rocket.position !== 1)return; // only check for hits if rocket is moving
+
     for (let i = 0; i < 20; i++){
         const rocketRadiusFly = dist (rocket.x, rocket.y, flygroup[i].x, flygroup[i].y);
         // calculate the distance
-        if (rocketRadiusFly){
-            fly.y = -1000; // move fly off screen
+        if (rocketRadiusFly <= rocket.size/2 + flygroup[i].size/2){
+            flygroup[i].y = -1000; // move fly off screen
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
         score++;
-
+    
         }
     }
    
