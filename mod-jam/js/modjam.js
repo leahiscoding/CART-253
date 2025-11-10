@@ -87,7 +87,7 @@ function setup() {
             x: random (0, width),
             y: random (0 + frog.size/3, height),
             size: random (5,30),
-            speed: random (2, 5)
+            speed: random (2, 7)
         });
     }
 }
