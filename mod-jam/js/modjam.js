@@ -57,7 +57,7 @@ let flygroup = []; // array to hold multiple flies
 let fireintent = false; // keep track of whether the player intends to fire
 let stage = 0;
 let flyNumbers = 20; // total number of flies
-let flyCaught = 0; // number of flies caught
+// let flyCaught = 0; // number of flies caught << troubleshooted with GenAI
 let kermitHit = 0; // number of times kermit got hit
 
 // Multimedia:
@@ -65,6 +65,7 @@ let spacekermit1;
 let spacekermit2;
 let laser;
 let asteroid;
+let space;
 
 // Preload multimedia
 function preload(){
@@ -72,6 +73,7 @@ function preload(){
     spacekermit2 = loadImage ("assets/images/spacekermit2.webp");
     laser = loadImage ("assets/images/laser.png");
     asteroid = loadImage ("assets/images/asteroid.png");
+    space = loadImage ("assets/images/space.jpeg");
 }
 
 
@@ -85,8 +87,8 @@ function setup() {
         flygroup.push({
             x: random (0, width),
             y: random (0 + frog.size/3, height),
-            size: random (10,30),
-            speed: random (2, 5)
+            size: random (10,50),
+            speed: random (1, 4)
         }); // add a new fly to the flygroup array
     }
 }
@@ -110,10 +112,11 @@ function draw (){
 //Start screen
 function startScreen () {
     background (0);
+    image (space, width/2, height/2, width, height);
     textAlign (CENTER);
     textFont('Courier New'); 
     textStyle(BOLD);
-    fill("#66FF33");
+    fill("255");
     stroke(150);
     strokeWeight(5);
     textSize (49);
@@ -146,6 +149,7 @@ function keyPressed() {
 function gameScreen (){
     push();
     background (0);
+    image (space, width/2, height/2, width, height);
     fill("#66FF33");
     drawRocket(); // draw the rocket
     drawFrog(); // draw the frog
@@ -291,12 +295,14 @@ function checkFrogHit (){
 // Progress Bar
 function ProgressBar (){
     push();
-    flyCaught = score - kermitHit; // calculate flies caught
-    if (flyCaught < 0) flyCaught = 0; // prevent negative flies caught
+    // flyCaught = score - kermitHit; // calculate flies caught
+    // if (flyCaught < 0) flyCaught = 0; // prevent negative flies caught < troubleshooted with GenAI
+    let currentProgress = score;
+    if (currentProgress < 0) currentProgress = 0; // prevent negative flies caught
     fill (255);
     rect(50,50,700,20);
-    fill ("#66FF33");
-    rect(50,50,(flyCaught/15)*700,20); // progress bar fills up as flies are caught
+    fill ("#4B76CC");
+    rect(50,50,(currentProgress/15)*700,20); // progress bar fills up as flies are caught
     pop();
 }
 
@@ -313,31 +319,32 @@ function displayTimer () {
     function checkScore(){
         //console.log(score)
         timer.timePassed = millis () - timer.startTime;
-        if (flyCaught - kermitHit === 15){ // if total amount of the flies caught is 15, player wins
+        if (score === 15){ // if total amount of the flies caught is 15, player wins
             finishState = "win"; // player wins
             gameState = "end"; // change game state to end
             return;
         }
         if (kermitHit >= 10) { // if kermit gets hit 10 times, player loses
-         finishState = "lose"; // player loses
-         gameState = "end"; //  change game state to end
-         return;
-         }
+            finishState = "lose"; // player loses
+            gameState = "end"; //  change game state to end
+            return;
+            }
 
         if (timer.timePassed > timer.timeInterval) { // if timer exceeds time limit, player loses
-        finishState = "lose"; // player loses
-        gameState = "end"; // change game state to end
-        return;
+            finishState = "lose"; // player loses
+            gameState = "end"; // change game state to end
+            return;
     }
 
     }
 // End screen
 function endScreen () {
     background ("#000000");
+    image (space, width/2, height/2, width, height);
     textAlign (CENTER);
     textFont('Courier New');
     textStyle(BOLD);
-    fill("#66FF33");
+    fill("255");
     stroke(150);
     strokeWeight(5);
     textSize (49);
