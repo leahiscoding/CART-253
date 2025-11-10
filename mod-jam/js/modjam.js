@@ -24,7 +24,9 @@ let timer =  {
     startTime:0,
     timePassed:0,
     timeInterval:20000
-}
+}  
+    
+
 
 
 // Game objects
@@ -157,24 +159,33 @@ function gameScreen (){
     ProgressBar();
     displayTimer ();
     pop();
-
+    
     timer.timePassed = millis () - timer.startTime;
-    if (timer.timePassed > timer.timeInterval) {
-        gameState = "end"
-        if (score =20) {
-            finishState = "win"
-        }
-        else {
-            finishState = "lose"
-        }
+
+if (flyCaught - kermitHit === 20){
+    finishState = "win";
+    gameState = "end";
+    return;
+}
+else if (kermitHit >= 10) {
+    finishState = "lose";
+    gameState = "end";
+    return;
+}
+
+else if (timer.timePassed > timer.timeInterval) {
+    finishState = "lose";
+    gameState = "end";
+    return;
     }
 
 }
 //Timer
-function startGame (){
-    gameState = "play";
-    timer.startTime = millis ();
-}
+
+// function startGame (){
+//     gameState = "play";
+//     timer.startTime = millis ();
+// }
 //Draw the frog
 function drawFrog(){
     push();
@@ -216,10 +227,10 @@ function drawRocket(){
 function shootRocket(){
 
 // Keep track and fire rockets
-    if (rocket.position === 0){ {
+    if (rocket.position === 0){ 
         rocket.x = frog.x;
         rocket.y = frog.y;
-    }
+    
     } // if fire is true and rocket position is 0, rocket position becomes 1 and rocket starts at frog position
 
     if (rocket.position === 1){
@@ -320,11 +331,17 @@ function displayTimer () {
     textSize(24)    
     fill(255);
     noStroke();
+    
     text(floor(timer.timePassed/1000),width-30,30)
     pop();
 }
 
-
+function checkScore (){
+    if (score > 20){
+        gameState = "change"
+    }
+    
+}
 
 // End screen
 function endScreen () {
