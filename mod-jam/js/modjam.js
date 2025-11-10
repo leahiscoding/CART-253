@@ -2,12 +2,13 @@
  * Frogfrogfrog
  * Leah Song
  * 
- * A game of catching flies with your frog-tongue
+ * A game of Shooting asteroids (flies) with your frog laser gun
  * 
  * Instructions:
  * - Move the frog with your mouse
- * - Click to launch the tongue
- * - Catch flies
+ * - Use spacebar to shoot asteroids (flies)
+ * - Shoot 15 asteroids (flies) to win
+ * - Avoid getting hit by 10 asteroids (flies) or running out of time (30 seconds) to lose
  * 
  * Made with p5
  * https://p5js.org/
@@ -24,18 +25,16 @@ let timer =  {
     startTime:0,
     timePassed:0,
     timeInterval:20000
-}  
+}  // defining limited time of 20 seconds
     
-
-
 
 // Game objects
 let frog = {
     x: 400,
-    y: 550,
-    size: 80,
-    velocityX: 5,
-    velocityY: 5,
+    y: 300,
+    size: 50,
+    velocityX: 5, // speed of frog movement
+    velocityY: 5, // speed of frog movement
 };
 let rocket = {
     x: frog.x,
@@ -44,7 +43,7 @@ let rocket = {
     size: 20,
     speed: 35,
 };
-let fire = false;
+let fire = false; // keep track of whether the rocket is fired
 
 let fly = {
     x: 0,
@@ -52,14 +51,14 @@ let fly = {
     size: 20,
     speed: 5
 }
-let flygroup = [];
+let flygroup = []; // array to hold multiple flies
 
 //Game control
-let fireintent = false;
+let fireintent = false; // keep track of whether the player intends to fire
 let stage = 0;
-let flyNumbers = 20;
-let flyCaught = 0;
-let kermitHit = 0;
+let flyNumbers = 20; // total number of flies
+let flyCaught = 0; // number of flies caught
+let kermitHit = 0; // number of times kermit got hit
 
 // Multimedia:
 let spacekermit1;
@@ -82,13 +81,13 @@ function setup() {
     imageMode(CENTER);
     startScreen();
     // initialize fly position
-    for (let flyCounter = 0; flyCounter < 20; flyCounter += 1){
+    for (let flyCounter = 0; flyCounter < 10; flyCounter += 1){
         flygroup.push({
             x: random (0, width),
             y: random (0 + frog.size/3, height),
-            size: random (5,30),
-            speed: random (2, 7)
-        });
+            size: random (10,30),
+            speed: random (2, 5)
+        }); // add a new fly to the flygroup array
     }
 }
 
@@ -99,7 +98,6 @@ function draw (){
     } // if game state is start, show start screen
     else if (gameState === "play"){
         gameScreen();
-        moveFrog();
     } // if game state is play, show game screen
     else if (gameState === "end"){
         endScreen();
@@ -113,7 +111,7 @@ function draw (){
 function startScreen () {
     background (0);
     textAlign (CENTER);
-    textFont('Courier New');
+    textFont('Courier New'); 
     textStyle(BOLD);
     fill("#66FF33");
     stroke(150);
@@ -122,7 +120,7 @@ function startScreen () {
     text ("Space Frog!Frog!Frog!", width/2, height/2-50);
     textSize (16);
     text ("Press SPACE to start game", width/2, height/2+25);
-    image (spacekermit1, width/2+245, height/2 + 150, 300, 300);
+    image (spacekermit1, width/2+245, height/2 + 150, 300, 300); 
 }
 
 // Press space to start game
@@ -132,6 +130,7 @@ function keyPressed() {
         rocket.position = 0;
         rocket.x = frog.x;
         rocket.y = frog.y;
+        timer.startTime = millis (); // timer function
         return; //add return so that the rest of the function doesn't run
     }
 
@@ -148,36 +147,22 @@ function gameScreen (){
     push();
     background (0);
     fill("#66FF33");
-    drawRocket();
-    drawFrog();
-    moveFrog();
-    shootRocket();
-    checkRocketHit();
-    checkFrogHit(); 
-    drawFlygroup();
-    moveFlygroup();
-    ProgressBar();
-    displayTimer ();
+    drawRocket(); // draw the rocket
+    drawFrog(); // draw the frog
+    moveFrog(); // move the frog
+    shootRocket(); // shoot the rocket
+    checkRocketHit(); // check if rocket hits flies
+    checkFrogHit(); // check if frog gets hit by flies
+    drawFlygroup(); // draw the flies
+    moveFlygroup(); // move the flies
+    ProgressBar(); // draw progress bar
+    displayTimer (); // display timer
+      
     pop();
 
-    timer.timePassed = millis () - timer.startTime;
+    timer.timePassed = millis () - timer.startTime; // update time passed
+    checkScore(); // check score and time to see if game ends
 
-if (flyCaught - kermitHit === 20){
-    finishState = "win";
-    gameState = "end";
-    return;
-}
-else if (kermitHit >= 10) {
-    finishState = "lose";
-    gameState = "end";
-    return;
-}
-
-else if (timer.timePassed > timer.timeInterval) {
-    finishState = "lose";
-    gameState = "end";
-    return;
-    }
 
 }
 //Timer
@@ -211,7 +196,7 @@ function moveFrog() {
     if (keyIsDown (UP_ARROW) === true){
         frog.y = frog.y - frog.velocityY;
     } // up arrow moves frog up
-    frog.x = constrain(frog.x, 0 + frog.size/3, width - frog.size/3);
+    frog.x = constrain(frog.x, 0 + frog.size/3, width - frog.size/3); // keep frog within canvas
     frog.y = constrain(frog.y, 0+ frog.size/3, height - frog.size/3);
 }
 
@@ -219,7 +204,7 @@ function moveFrog() {
 function drawRocket(){ 
     push();
     fill(255, 0, 0);
-    drawingContext.shadowBlur = 10;
+    drawingContext.shadowBlur = 20; // use the blur property from art-jam assignment
     drawingContext.shadowColor = color(255, 255, 255);
     image (laser, rocket.x, rocket.y, rocket.size, rocket.size);
     pop();
@@ -248,49 +233,41 @@ function shootRocket(){
 
 // Draw flies using a for loop
 function drawFlygroup() {
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < flygroup.length; i++){
         push();
         noStroke();
         fill(255);
-        image(asteroid, flygroup[i].x, flygroup[i].y, flygroup[i].size, flygroup[i].size);
+        image(asteroid, flygroup[i].x, flygroup[i].y, flygroup[i].size, flygroup[i].size); // draw each fly
         pop();  
     }
 }
 
 // Move flies using a for loop
 function moveFlygroup(){
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < flygroup.length; i++){
         flygroup[i].x += flygroup[i].speed;
         if (flygroup[i].x > width){
             flygroup[i].x = 0;
-            flygroup[i].y = random(0 + frog.size/2, height);
+            flygroup[i].y = random(0 + frog.size/2, height); // reset fly position when it goes off screen
         }
     }
 }
 
-/**
-//  * Resets the fly to the left with a random y - Pippin's function
-//  */
-// function resetFly() {
-//     fly.x = 0
-//     fly.y = random(0+frog.size , height-frog.size);
-// }
 
 // Check if rocket hits flies
 function checkRocketHit (){
 
     if (rocket.position !== 1)return; // only check for hits if rocket is moving
 
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < 10; i++){
         const rocketRadiusFly = dist (rocket.x, rocket.y, flygroup[i].x, flygroup[i].y);
         // calculate the distance
         if (rocketRadiusFly <= rocket.size/2 + flygroup[i].size/2){
             flygroup[i].y = -1000; // move fly off screen
-        rocket.position = 0;
-        rocket.x = frog.x;
+        rocket.position = 0; // reset rocket
+        rocket.x = frog.x; 
         rocket.y = frog.y;
-        flyCaught++;
-        score++;
+        score++; // increase score
     
         }
     }
@@ -299,15 +276,13 @@ function checkRocketHit (){
 
 // Check if frog gets hit by the fly
 function checkFrogHit (){
-    for (let i = 0; i < 20; i++){
+    for (let i = 0; i < 10; i++){
         const frogRadiusFly = dist (frog.x, frog.y, flygroup[i].x, flygroup[i].y);
         // calculate the distance
         if (frogRadiusFly <= frog.size/2 + flygroup[i].size/2){
             flygroup[i].y = -1000; // move fly off screen
-        kermitHit++;
-         if(flyCaught>0)
-        flyCaught--;
-        score--;
+        kermitHit++; // increase kermit hit
+        score--; // decrease score
     
         }
     }
@@ -316,14 +291,13 @@ function checkFrogHit (){
 // Progress Bar
 function ProgressBar (){
     push();
+    flyCaught = score - kermitHit; // calculate flies caught
+    if (flyCaught < 0) flyCaught = 0; // prevent negative flies caught
     fill (255);
-    rect (50,50,700,20);
-    fill (0,255,0);
-    let progress = map (flyCaught, 0, flyNumbers, 0, 700);
-    flyCaught = constrain (flyCaught, 0, 20);
-    rect (50,50,progress,20);
+    rect(50,50,700,20);
+    fill ("#66FF33");
+    rect(50,50,(flyCaught/15)*700,20); // progress bar fills up as flies are caught
     pop();
-
 }
 
 function displayTimer () {
@@ -332,17 +306,31 @@ function displayTimer () {
     fill(255);
     noStroke();
     
-    text(floor(timer.timePassed/1000),width-30,30)
+    text(floor(timer.timePassed/1000),width-30,30) // display time passed in seconds
     pop();
 }
 
-function checkScore (){
-    if (score > 20){
-        gameState = "change"
-    }
-    
-}
+    function checkScore(){
+        //console.log(score)
+        timer.timePassed = millis () - timer.startTime;
+        if (flyCaught - kermitHit === 15){ // if total amount of the flies caught is 15, player wins
+            finishState = "win"; // player wins
+            gameState = "end"; // change game state to end
+            return;
+        }
+        if (kermitHit >= 10) { // if kermit gets hit 10 times, player loses
+         finishState = "lose"; // player loses
+         gameState = "end"; //  change game state to end
+         return;
+         }
 
+        if (timer.timePassed > timer.timeInterval) { // if timer exceeds time limit, player loses
+        finishState = "lose"; // player loses
+        gameState = "end"; // change game state to end
+        return;
+    }
+
+    }
 // End screen
 function endScreen () {
     background ("#000000");
@@ -363,24 +351,3 @@ function endScreen () {
     text ("Refresh to play again", width/2, height/2+25);
 }
 
-// function drawProgressBar() {
-//     // Outer bar
-//     push();
-//     stroke("#ce2a4d");
-//     strokeWeight(12);
-//     fill("#ce2a4d");
-//     rect(bar.x, bar.y, bar.w, bar.h, 30);
-//     pop();
-  
-//     // Fill progress
-//     let progress = map(bugsCaught, 0, totalBugs, 0, bar.w);
-  
-//     // Smoothly move toward target
-//     animatedProgress = lerp(animatedProgress, progress, 0.1);
-  
-//     noStroke();
-//     fill("##ffffff");
-//     rect(bar.x, bar.y, animatedProgress, bar.h, 30);
-  
-//     // Optional: text above bar
-//   }
