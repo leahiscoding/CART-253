@@ -50,7 +50,7 @@ let fly = {
     x: 0,
     y: 0, 
     size: 20,
-    speed: 10
+    speed: 5
 }
 let flygroup = [];
 
@@ -85,9 +85,9 @@ function setup() {
     for (let flyCounter = 0; flyCounter < 20; flyCounter += 1){
         flygroup.push({
             x: random (0, width),
-            y: random (0 + frog.size/3, height - frog.size),
-            size: random (5,25),
-            speed: random (2, 10)
+            y: random (0 + frog.size/3, height),
+            size: random (5,30),
+            speed: random (2, 5)
         });
     }
 }
@@ -159,7 +159,7 @@ function gameScreen (){
     ProgressBar();
     displayTimer ();
     pop();
-    
+
     timer.timePassed = millis () - timer.startTime;
 
 if (flyCaught - kermitHit === 20){
@@ -248,7 +248,7 @@ function shootRocket(){
 
 // Draw flies using a for loop
 function drawFlygroup() {
-    for (let i = 0; i < 18; i++){
+    for (let i = 0; i < 20; i++){
         push();
         noStroke();
         fill(255);
@@ -263,7 +263,7 @@ function moveFlygroup(){
         flygroup[i].x += flygroup[i].speed;
         if (flygroup[i].x > width){
             flygroup[i].x = 0;
-            flygroup[i].y = random(0 + frog.size/2, height - frog.size);
+            flygroup[i].y = random(0 + frog.size/2, height);
         }
     }
 }
