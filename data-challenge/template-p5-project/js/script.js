@@ -1,6 +1,6 @@
 /**
- * Terrible New Car
- * Pippin Barr
+ * Data Challenge
+ * Leah Song,
  * 
  * A program to generate new car model names using dinosaurs.
  * 
@@ -23,7 +23,8 @@ let carName = "Click to generate a car name.";
  * Load the car and dinosaur data
  */
 function preload() {
-
+    carData = loadJSON("assets/data/cars.json");
+    dinosaurData = loadJSON("assets/data/dinosaurs.json");
 }
 
 /**
@@ -38,7 +39,7 @@ function setup() {
 */
 function draw() {
     background(0);
-
+    mousePressed();
     push();
     fill("pink");
     textAlign(CENTER, CENTER);
@@ -51,5 +52,11 @@ function draw() {
  * Generate a new car name
  */
 function mousePressed() {
+
+    const cars = carData.cars;
+    const dinosaurs = dinosaurData.dinosaurs;
+    if (mouseIsPressed) {
+        carName = random (cars) + " " + random (dinosaurs);
+    }
 
 }
