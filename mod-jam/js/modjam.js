@@ -19,6 +19,7 @@
 let gameState = "start";
 let finishState = "end";
 let score = 0;
+const maxScore = 15;
 
 // Timer object
 let timer =  { 
@@ -55,7 +56,6 @@ let flygroup = []; // array to hold multiple flies
 
 //Game control
 let fireintent = false; // keep track of whether the player intends to fire
-let stage = 0;
 let flyNumbers = 20; // total number of flies
 // let flyCaught = 0; // number of flies caught << troubleshooted with GenAI
 let kermitHit = 0; // number of times kermit got hit
@@ -164,7 +164,6 @@ function gameScreen (){
       
     pop();
 
-    timer.timePassed = millis () - timer.startTime; // update time passed
     checkScore(); // check score and time to see if game ends
 
 
@@ -263,7 +262,7 @@ function checkRocketHit (){
 
     if (rocket.position !== 1)return; // only check for hits if rocket is moving
 
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < flygroup.length; i++){
         const rocketRadiusFly = dist (rocket.x, rocket.y, flygroup[i].x, flygroup[i].y);
         // calculate the distance
         if (rocketRadiusFly <= rocket.size/2 + flygroup[i].size/2){
@@ -280,7 +279,7 @@ function checkRocketHit (){
 
 // Check if frog gets hit by the fly
 function checkFrogHit (){
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < flygroup.length; i++){
         const frogRadiusFly = dist (frog.x, frog.y, flygroup[i].x, flygroup[i].y);
         // calculate the distance
         if (frogRadiusFly <= frog.size/2 + flygroup[i].size/2){
@@ -302,7 +301,8 @@ function ProgressBar (){
     fill (255);
     rect(50,50,700,20);
     fill ("#4B76CC");
-    rect(50,50,(currentProgress/15)*700,20); // progress bar fills up as flies are caught
+    rect(50,50,(currentProgress/maxScore)*700,20); // progress bar fills up as flies are caught
+    // currentProgress=map(score,0(min),15(max),0(min),700(max));
     pop();
 }
 
@@ -312,14 +312,15 @@ function displayTimer () {
     fill(255);
     noStroke();
     
-    text(floor(timer.timePassed/1000),width-30,30) // display time passed in seconds
+    text(floor((timer.timeInterval-timer.timePassed)/1000),width-30,30) // display time passed in seconds
+    //flor: rounds number down
     pop();
 }
 
     function checkScore(){
         //console.log(score)
         timer.timePassed = millis () - timer.startTime;
-        if (score === 15){ // if total amount of the flies caught is 15, player wins
+        if (score === maxScore){ // if total amount of the flies caught is 15, player wins
             finishState = "win"; // player wins
             gameState = "end"; // change game state to end
             return;
