@@ -11,4 +11,6 @@ Mod jam response
 	Honestly, Anna’s graphic work was fantastic. It made me feel like I was playing an actual game. The introduction page part was so cute, and I liked how the frog slowly moved to the center and talked to the player (with an option to skip, which is really useful). It reminded me of the Nintendo DS game experience. 
     
 	Unlike other games, this game stood out in a way that I was able to move the frog using the position of mouseX and mouseY. I think the concept of the game was fantastic and well executed. I would love to ask Anna about her work process. I believe that I will learn a lot from their work. 
-
+- 	Felix
+	This game feels like a good example of mod jam, while adding extra functions, such as selecting colours, adding hunger, and a combo function to diversify the game. 
+-	Ray
