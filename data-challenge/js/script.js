@@ -1,6 +1,7 @@
 /**
  * Data Challenge
- * Leah Song,
+ * Leah Song
+ * 
  * 
  * A program to generate new car model names using dinosaurs.
  * 
@@ -25,6 +26,7 @@ let carName = "Click to generate a car name.";
 function preload() {
     carData = loadJSON("assets/data/cars.json");
     dinosaurData = loadJSON("assets/data/dinosaurs.json");
+    langData = loadJSON("assets/data/lang.json");
 }
 
 /**
@@ -32,6 +34,12 @@ function preload() {
 */
 function setup() {
     createCanvas(600, 400);
+    if (lang === "fr") {
+        carName = langData.instructions.fr;
+    }
+    else if (lang === "en") {
+        carName = langData.instructions.en;
+    }
 }
 
 /**

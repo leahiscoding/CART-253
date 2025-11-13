@@ -1,0 +1,12 @@
+{
+    "description": "Supported languages for the application",
+    "instructions":
+    {
+        "en": 
+            "Click to generate a car name."
+        ,
+        "fr": 
+            "Cliquer pour générer un nom de voiture."
+        
+    }
+}
