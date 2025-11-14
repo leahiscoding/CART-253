@@ -4,20 +4,20 @@ Mod jam response
 
 -   While working on my project, I also looked at my classmate’s project and inspected their code (it feels unethical, for some reason).  Here are some projects that I really appreciated and learned a lot from.
 
--   Blaise
+-   Blaise:
 	I was quite surprised when I first looked at Blaise’s game because it was just like what I was thinking of in terms of recreating the game (besides the laser tongue part). I think this game is creative, and I enjoy how the speed of the game gets faster as it passes. 
 
 	Blaise used for loop to create the stars in the back, which reminded me of my art jam project. I wish I could’ve incorporated this part into my code as well. Also, one thing that stood out to me was having a focus of aim. I think this makes the game experience better. I could tell that they invested a lot of time and effort in this game.
 
-- Anna
+- Anna:
 	Honestly, Anna’s graphic work was fantastic. It made me feel like I was playing an actual game. The introduction page part was so cute, and I liked how the frog slowly moved to the center and talked to the player (with an option to skip, which is really useful). It reminded me of the Nintendo DS game experience. 
 	
 	Unlike other games, this game stood out in a way that I was able to move the frog using the position of mouseX and mouseY. I think the concept of the game was fantastic and well executed. I would love to ask Anna about her work process. I believe that I will learn a lot from their work. 
 
--   Felix
+-   Felix:
 	This game feels like a good example of what Pippin expected of mod jam. Adding extra functions like selecting colours, adding hunger, and a combo function diversified the game while keeping the original intent. 
 	
 	Felix also told me that he spent a lot of time drawing and creating this game. Just like the amount of effort he put into his work, his game is outstanding and sleek. The codes are also well-organized and easy to understand. 
 
--   Ray
+-   Ray:
 	I wanted to add Ray's game because I got inspiration from their game. I think the game is so well executed and neat. The codes were a little bit confusing to understand, but the gameplay is very smooth and clean. I could also tell that Ray put significant amount of time in this game, which I appreciate a lot. 
