@@ -9,8 +9,8 @@ Mod jam response
 
 	Blaise used for loop to create the stars in the back, which reminded me of my art jam project. I wish I could’ve incorporated this part into my code as well. Also, one thing that stood out to me was having a focus of aim. I think this makes the game experience better. I could tell that they invested a lot of time and effort in this game.
 
-- Anna:
-	Honestly, Anna’s graphic work was fantastic. It made me feel like I was playing an actual game. The introduction page part was so cute, and I liked how the frog slowly moved to the center and talked to the player (with an option to skip, which is really useful). It reminded me of the Nintendo DS game experience. 
+- Aliyah:
+	Honestly, Aliyah's graphic work was fantastic. It made me feel like I was playing an actual game. The introduction page part was so cute, and I liked how the frog slowly moved to the center and talked to the player (with an option to skip, which is really useful). It reminded me of the Nintendo DS game experience. 
 	
 	Unlike other games, this game stood out in a way that I was able to move the frog using the position of mouseX and mouseY. I think the concept of the game was fantastic and well executed. I would love to ask Anna about her work process. I believe that I will learn a lot from their work. 
 
