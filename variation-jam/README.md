@@ -28,7 +28,10 @@ This bit should attribute any code, assets or other elements used taken from oth
 > - https://stackoverflow.com/questions/58477636/transitioning-from-one-scene-to-the-next-with-p5-js 
 > - https://caglrc.cc/glasstty/
 > - https://editor.p5js.org/pippinbarr/sketches/bjxEfpiwS
+> - https://editor.p5js.org/pphoebelemonn/sketches/Q2o88Dgos
 > - https://editor.p5js.org/garciadelcastillo/sketches/cD8uruKPt
+> - https://editor.p5js.org/xc2736/sketches/1igkPpfX5
+> - https://creative-coding.decontextualize.com/text-and-type/
 
 
 ## License

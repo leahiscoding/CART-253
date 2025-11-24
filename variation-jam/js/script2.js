@@ -14,12 +14,10 @@ let codeLines = [
         "Initializing time-layer......... desync detected",
         "Recalibrating................... aligned",
         "",
-        "",
         "Establishing network connections:",
         "> attach: /core/stack/ether  ",
         "> status: passive  ",
         "> reason: none supplied",
-        "",
         "",
         "Compiling background processes:",
         "    - node_04        ready",
@@ -27,25 +25,21 @@ let codeLines = [
         "    - node_11.aux    suppressed",
         "    - node_19        pending (ignored)",
         "",
-        "",
         "Synchronizing local data stores:",
         "Checking user registry.......... 1 entry found",
         "Hashing identifiers............. completed",
         "Obfuscating parameters.......... done",
         "Restoring volatile cache........ done",
         "",
-        "",
         "-- SYSTEM MESSAGES --",
         "unknown flag “–return”",
         "no previous state detected",
         "continuing in default mode",
         "",
-        "",
         "Probing environment…",
         "    signal A  : weak",
         "    signal B  : stable",
         "    signal C  : unknown (accepted)",
-        "",
         "",
         "Suspended data fragments…   14 detected",
         "Not restoring (policy: skip)",
@@ -62,12 +56,10 @@ let codeLines = [
         "> No context provided.  ",
         "> Proceeding.",
         "",
-        "",
         "--------------------------------------------------",
         "    environment “ether://”",
         "    initialized without profile  ",
         "--------------------------------------------------",
-        "",
         "",
         "Awaiting first instruction…",
         "",
@@ -75,6 +67,8 @@ let codeLines = [
 ];
 // global variables
 let currentLines;
+let lineIndex = 0;
+let numIndex = 0;
 //let currentScene;
 let pageMargin = 10;
 
@@ -93,32 +87,43 @@ function setup() {
 }
 
 function draw() {
-   drawCodeBox ();
-   drawCodeLines ();
+    background (255);
+    drawCodeLines ();
 }
-let scene = codeLines.substring (0, currentLines);
-
-// draw code box
- function drawCodeBox () {
-     push ();
-     background (255);
-     noStroke()
-     noFill ();
-     rect (20,20,windowWidth*0.95, windowHeight*0.95);
-     pop ();
- }
 
 // draw code lines
  function drawCodeLines () {
-    push ();
-    textSize(12);
-    textFont (codeFont);
-    textAlign (LEFT, TOP);
-    text (scene,pageMargin,pageMargin,windowWidth*0.95, windowHeight*0.95)
-    pop ();
- }
 
-currentLines += random (0,1);
+
+     for (let i = 0; i <= lineIndex; i++) {
+       if (i <= lineIndex){
+        push ();
+        textSize(12);
+        textFont (codeFont);
+        textAlign (LEFT, TOP);
+        fill (0);
+        text (codeLines[i], pageMargin, pageMargin + i * 14);
+        pop ();
+        }
+
+        // else if (i == lineIndex){
+        //  partialLine = codeLines[i].substring (0, numIndex);
+        //     text (partialLine, pageMargin, pageMargin + i * 14);
+
+        // }
+        numIndex += random (0.1,0.7);
+
+    if (numIndex > codeLines[lineIndex].length){
+    numIndex = 0;
+    lineIndex ++;
+    }
+
+       }
+ }
+ 
+
+
+
 
 // vanlia javascript to make canvas resizable
 function reportWindowSize() {
