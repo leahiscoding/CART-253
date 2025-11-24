@@ -27,6 +27,9 @@ This bit should attribute any code, assets or other elements used taken from oth
 > - This project uses [p5.js](https://p5js.org).
 > - https://stackoverflow.com/questions/58477636/transitioning-from-one-scene-to-the-next-with-p5-js 
 > - https://caglrc.cc/glasstty/
+> - https://editor.p5js.org/pippinbarr/sketches/bjxEfpiwS
+> - https://editor.p5js.org/garciadelcastillo/sketches/cD8uruKPt
+
 
 ## License
 

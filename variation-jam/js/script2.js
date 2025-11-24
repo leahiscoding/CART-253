@@ -73,39 +73,54 @@ let codeLines = [
         "",
         "Press [ENTER] to continue."
 ];
+// global variables
+let currentLines;
+//let currentScene;
+let pageMargin = 10;
 
-let linesToDisplay;
-let currentScene;
 let codeFont;
 
-
+// preload assets
 function preload (){
     codeFont = loadFont ('assets/Glass_TTY_VT220.ttf');
 }
+
+// setting up the canvas
 function setup() {
     createCanvas (windowWidth, windowHeight);
-    
+    //currentScene = scene.loading;
 
 }
 
 function draw() {
-   
+   drawCodeBox ();
+   drawCodeLines ();
 }
-const scene = {
-    
-        
-}
+let scene = codeLines.substring (0, currentLines);
 
-function drawCodeBox () {
+// draw code box
+ function drawCodeBox () {
+     push ();
+     background (255);
+     noStroke()
+     noFill ();
+     rect (20,20,windowWidth*0.95, windowHeight*0.95);
+     pop ();
+ }
+
+// draw code lines
+ function drawCodeLines () {
     push ();
-    background (0,0,255);
-    stroke (255);
-    strokeWeight (2);
-    noFill ();
-    rect (20,20,windowWidth*0.95, windowHeight*0.95);
+    textSize(12);
+    textFont (codeFont);
+    textAlign (LEFT, TOP);
+    text (scene,pageMargin,pageMargin,windowWidth*0.95, windowHeight*0.95)
     pop ();
-}
+ }
 
+currentLines += random (0,1);
+
+// vanlia javascript to make canvas resizable
 function reportWindowSize() {
     resizeCanvas(windowWidth, windowHeight);
 }
