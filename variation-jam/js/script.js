@@ -8,36 +8,36 @@
 
 "use strict";
 
-let usernameBox;
+// global variables
 let passwordBox;
 let button;
 let greeting;
 
 
 
-
-
-/**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
-*/
 function setup() {
-    background (0);
-    createCanvas (windowWidth, windowHeight);
     
-    usernameBox = createInput ();
-    usernameBox.attribute('Placeholder', 'Enter Username');
-    usernameBox.position (windowWidth/2, windowHeight/2);
-    // questions
-
+    createCanvas (windowWidth, windowHeight);
+    background (0);
+    // imported google font using css and html
+    textFont('orbitron-regular400');
+    
+    // input password
     passwordBox = createInput ();
     passwordBox.attribute('Placeholder', 'Enter Password');
-    passwordBox.position (windowWidth/2, windowHeight/2+50);
-    // questions
+    passwordBox.class ("orbitron-regular");
+    passwordBox.style ('color', 'black');
 
+    // enter button
     button = createButton ('enter');
-    button.class ("");
-    button.position (windowWidth/2, windowHeight/2+100);
+    button.class ("orbitron-regular");
     button.mousePressed (login);
+
+    // greeting element
+    greeting = createElement ('h3', 'Welcome');
+    greeting.style ('color', 'white');
+    greeting.style ('font-weight', 'light');
+    greeting.class ("orbitron-regular");
 }
 
 
@@ -45,20 +45,27 @@ function setup() {
 
 
 
+// login function to load ehter
 function login (){
-    let username = usernameBox.value ()
     let password = passwordBox.value ()
     
-    if (username == "user" && password == "pass") {
-        localStorage.setItem ("username", username);
+    if (password == "1") {
+        //R-O-R'
         localStorage.setItem ("password", password);
-        window.open (script2.js)
+        window.open ("ether.html", "_self");
 }
 }
 
-/**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
-*/
+// positining elements
 function draw() {
-
+    passwordBox.position (windowWidth/2-70, windowHeight/2);
+    button.position (windowWidth/2+40, windowHeight/2+50);
+    greeting.position (windowWidth/2-15, windowHeight/2-65);
 }
+
+// vanlia javascript to make canvas resizable
+function reportWindowSize() {
+  }
+  
+  window.onresize = reportWindowSize;
+  
