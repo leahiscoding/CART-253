@@ -32,6 +32,7 @@ function setup() {
     button = createButton ('enter');
     button.class ("orbitron-regular");
     button.mousePressed (login);
+    
 
     // greeting element
     greeting = createElement ('h3', 'Welcome');
@@ -52,7 +53,7 @@ function login (){
     if (password == "1") {
         //R-O-R'
         localStorage.setItem ("password", password);
-        window.open ("ether.html", "_self");
+        window.open ("loading.html", "_self");
 }
 }
 
@@ -61,6 +62,12 @@ function draw() {
     passwordBox.position (windowWidth/2-70, windowHeight/2);
     button.position (windowWidth/2+40, windowHeight/2+50);
     greeting.position (windowWidth/2-15, windowHeight/2-65);
+}
+
+function keyPressed () {
+    if (keyCode === ENTER) {
+        login ();
+    }
 }
 
 // vanlia javascript to make canvas resizable
