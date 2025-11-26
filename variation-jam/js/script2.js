@@ -8,58 +8,30 @@ let codeLines = [
         "",
         "Loading modules................. OK",
         "Resolving system path........... /env/root",
-        "Verifying runtime integrity..... 98% (2 unresolved)",
-        "Linking dependencies............ OK",
-        "Allocating memory blocks........ OK",
-        "Initializing time-layer......... desync detected",
         "Recalibrating................... aligned",
         "",
         "Establishing network connections:",
         "> attach: /core/stack/ether  ",
         "> status: passive  ",
-        "> reason: none supplied",
         "",
         "Compiling background processes:",
         "    - node_04        ready",
         "    - node_11        ready",
-        "    - node_11.aux    suppressed",
-        "    - node_19        pending (ignored)",
         "",
         "Synchronizing local data stores:",
         "Checking user registry.......... 1 entry found",
         "Hashing identifiers............. completed",
-        "Obfuscating parameters.......... done",
-        "Restoring volatile cache........ done",
         "",
         "-- SYSTEM MESSAGES --",
         "no previous state detected",
         "continuing in default mode",
-        "",
-        "Probing environment…",
-        "    signal A  : weak",
-        "    signal B  : stable",
-        "    signal C  : unknown (accepted)",
-        "",
-        "Not restoring (policy: skip)",
-        "",
-        "Heartbeat engine.......... nominal",
-        "Surface renderer.......... warming up",
-        "Internal map.............. unresolved (running without map)",
-        "",
-        "[ OK ] Core acknowledged",
-        "[ OK ] Quiet-start sequence active",
-        "[ OK ] Input channel unlocked",
-        "",
-        "> No warnings issued.  ",
-        "> No context provided.  ",
-        "> Proceeding.",
-        "",
         "--------------------------------------------------",
-        "    environment “ether://”",
+        "    environment ether loaded  ",
         "    initialized without profile  ",
         "--------------------------------------------------",
         "",
-        "Awaiting first instruction…",
+        "> Proceeding.",
+        "Awaiting first instruction...",
         "",
         "Press [ENTER] to continue."
 ];
@@ -89,9 +61,12 @@ function setup() {
 
 function draw() {
     if (state === "start"){
-        background (255);
-        text ("loading", pageMargin, pageMargin);
-        text (ellipses,pageMargin+40, pageMargin);
+        background (0);
+        text ("loading", pageMargin+30, pageMargin+40);
+        textSize (20);
+        textFont (codeFont);
+        fill (0,255,0); 
+        text (ellipses,pageMargin+110, pageMargin+40);
         if (frameCount % 15 === 0){
             if (ellipses.length < 3){
                 ellipses += ".";
@@ -112,14 +87,14 @@ function draw() {
     }   
     // so that it only draws once after the code lines have been generated
    if (state === "drawCode") {
-    background (255);
+    background (0);
     // background to make the loading disappear
     push ();
-    textSize(12);
+    textSize(20);
     textFont (codeFont);
     textAlign (LEFT, TOP);
-    fill (0);
-    text (typeString, pageMargin, pageMargin);
+    fill (0,255,0);
+    text (typeString, pageMargin+30, pageMargin+20);
     // typeString has constantly has characters adding to it - drawing whatever is in the typestring
     pop ();
    }
@@ -163,7 +138,7 @@ function draw() {
         }
         }
         
-    },random (2,5)); // randomizes the speed of typing between 10 and 30 milliseconds
+    },random (10,30)); // randomizes the speed of typing between 10 and 30 milliseconds
     
        
  }
