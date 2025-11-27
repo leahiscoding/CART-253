@@ -8,7 +8,7 @@ function draw () {
     
     noStroke();
      console.log (frameCount);
-    if (frameCount % 5 === 0){
+    if (frameCount % 6 === 0){
     background (0);
     for (let i = 2; i < width; i +=random (0,25)){
         for (let j = 2; j < height; j +=random (0,25)){
@@ -16,10 +16,14 @@ function draw () {
             fill(n*random (100,255), n * random(100,255), n * random(100,255));
             ellipse(i, j, 2,2);
         
+            text("welcome to ether", windowWidth/2, windowHeight/2)
+            textSize(60);
+            textAlign(CENTER, CENTER);
     }
     }
 }    
 }
+ 
 
 function reportWindowSize() {
   }
