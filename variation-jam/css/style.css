@@ -28,3 +28,20 @@ body {
 }
 
 
+#ascii-div {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  line-height: 10px;
+  text-align: center;
+  white-space: pre;
+  height: 100%;
+  width: 100%;
+  /* overflow: hidden;
+  transform: translate3d(0,0,0); */
+  /* user-select: none; */
+  display: block;
+}

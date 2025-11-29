@@ -60,6 +60,7 @@ function setup() {
 }
 
 function draw() {
+    // loading screen for ether environment
     if (state === "start"){
         background (0);
         text ("loading", pageMargin+30, pageMargin+40);
@@ -67,6 +68,7 @@ function draw() {
         textFont (codeFont);
         fill (0,255,0); 
         text (ellipses,pageMargin+110, pageMargin+40);
+        // make dots animate
         if (frameCount % 15 === 0){
             if (ellipses.length < 3){
                 ellipses += ".";
@@ -75,11 +77,13 @@ function draw() {
                 ellipses = "";
             }
         }
-        if (millis() > random (2000,6000)){
+        // after a random time, switch to loading code lines
+        if (millis() > random (3000,10000)){
             state = "loadCodeLines";
         }
     }
     
+    // draw code lines
     if (state === "loadCodeLines"){ {
         drawCodeLines ();
         state = "drawCode";
@@ -138,11 +142,11 @@ function draw() {
         }
         }
         
-    },random (10,30)); // randomizes the speed of typing between 10 and 30 milliseconds
+    },random (30,60)); // randomizes the speed of typing between 10 and 30 milliseconds
     
        
  }
-
+// after the loading is done, when enter is pressed on the loading screen
  function keyPressed (){
     if (keyCode === ENTER && currentScene === "ready") {
         window.location.href = "ether.html";
