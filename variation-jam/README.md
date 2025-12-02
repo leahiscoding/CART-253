@@ -33,6 +33,9 @@ This bit should attribute any code, assets or other elements used taken from oth
 > - https://editor.p5js.org/xc2736/sketches/1igkPpfX5
 > - https://creative-coding.decontextualize.com/text-and-type/
 > - https://www.gorillasun.de/blog/an-introduction-to-perlin-noise-in-p5js-and-processing/
+> - https://editor.p5js.org/codingtrain/sketches/KTVfEcpWx
+> - https://www.youtube.com/watch?v=55iwMYv8tGI
+> - https://www.gorillasun.de/blog/an-introduction-to-perlin-noise-in-p5js-and-processing/
 
 
 
