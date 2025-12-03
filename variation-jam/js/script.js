@@ -1,9 +1,10 @@
 /**
- * Title of Project
- * Author Name
+ * Ether
+ * Leah Song
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * Ether is a cyber world that can only be accessed through a password.
+ * Users can explore the world after entering the correct password.
+ * There are three different functions once you enter the world.
  */
 
 "use strict";
@@ -50,7 +51,7 @@ function setup() {
 function login (){
     let password = passwordBox.value ()
     
-    if (password == "1") {
+    if (password == "R-O-R") {
         //R-O-R'
         localStorage.setItem ("password", password);
         window.open ("loading.html", "_self");
