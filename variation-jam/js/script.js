@@ -52,7 +52,6 @@ function login (){
     let password = passwordBox.value ()
     
     if (password == "R-O-R") {
-        //R-O-R'
         localStorage.setItem ("password", password);
         window.open ("loading.html", "_self");
 }
