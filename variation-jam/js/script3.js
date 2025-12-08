@@ -74,7 +74,7 @@ function mousePressed() {
         interaction = true;
         state ="ether";
         // return to avoid further processing
-        return;
+        
     }
 }
 // navigation within ether environment
