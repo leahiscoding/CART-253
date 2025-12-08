@@ -3,6 +3,12 @@ const density = '10pressabuttonatosavephoto   ';
 
 let video;
 let asciiDiv;
+let cameraSound;
+
+// preload function
+function preload (){
+    cameraSound = loadSound('assets/sounds/camera.mp3');
+}
 // setup function
 function setup () {
     asciiDiv = createDiv ().id ('ascii-div');
@@ -64,7 +70,7 @@ function keyPressed() {
     link.download = 'ascii.png'; 
     link.click(); // Simulate a click on the link to trigger the download
 
-    
+    cameraSound.play(); // play camera sound
 
     }); 
   }
