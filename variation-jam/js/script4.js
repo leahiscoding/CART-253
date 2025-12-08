@@ -8,7 +8,7 @@ function setup () {
     asciiDiv = createDiv ().id ('ascii-div');
     noCanvas();
     video = createCapture (VIDEO);
-    video.size (280,120);
+    video.size (260,110);
     video.position (CENTER);
     video.hide ();
 }
