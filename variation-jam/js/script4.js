@@ -8,7 +8,7 @@ function setup () {
     asciiDiv = createDiv ().id ('ascii-div');
     noCanvas();
     video = createCapture (VIDEO);
-    video.size (300,140);
+    video.size (280,120);
     video.position (CENTER);
     video.hide ();
 }
@@ -51,7 +51,7 @@ function draw () {
 }
 // save image when 'a' key is pressed
 function keyPressed() {
-  if (key === 's' || key === 'S' ) {
+  if (key === 'a' || key === 'A' ) {
      html2canvas(document.querySelector("#ascii-div")).then(canvas => {
     //canvas.id = "testCanvas"
     //document.body.appendChild(canvas)
