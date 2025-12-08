@@ -1,5 +1,5 @@
 // ASCII camera video capture
-const density = '10pressabuttontosavephoto   ';
+const density = '10pressabuttonatosavephoto   ';
 
 let video;
 let asciiDiv;
@@ -8,7 +8,7 @@ function setup () {
     asciiDiv = createDiv ().id ('ascii-div');
     noCanvas();
     video = createCapture (VIDEO);
-    video.size (280,140);
+    video.size (300,140);
     video.position (CENTER);
     video.hide ();
 }
