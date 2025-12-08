@@ -1,3 +1,5 @@
+"use strict";
+
 // ASCII camera video capture
 const density = '10pressabuttonatosavephoto   ';
 

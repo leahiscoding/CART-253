@@ -1,3 +1,5 @@
+"use strict";
+
 // global variables
 let etherFont;
 let ethersong;

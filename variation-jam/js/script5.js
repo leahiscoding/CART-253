@@ -1,3 +1,5 @@
+"use strict";
+
 // global variables
 let currentState = "wish";
 let answerBox;

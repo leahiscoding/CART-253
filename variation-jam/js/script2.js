@@ -38,29 +38,41 @@ let codeLines = [
 
 // global variables
 let pageMargin = 10;
-let state = "start"
+let state = "loading";
 // 0 = loading, 1 = ready
 let currentScene = "loading"
 let codeFont;
 let typeString = "";
 let ellipses = "";
 // a variable that accumulates letters and cotains the whole thing at the end.
+let screenTyping;
+let startedSound = false;
 
 // preload assets
 function preload (){
     codeFont = loadFont ('assets/Glass_TTY_VT220.ttf');
+    screenTyping = loadSound ('assets/sounds/loading.mp3');
 }
 
 // setting up the canvas
 function setup() {
     createCanvas (windowWidth, windowHeight);
     //currentScene = scene.loading;
+    
 
    
 }
 
 function draw() {
     // loading screen for ether environment
+    if (state === "loading") {
+        background (0);
+        textSize (20);
+        textAlign (LEFT, TOP);
+        fill (0,255,0); 
+        textFont (codeFont);
+        text ("press to load environment", pageMargin+30, pageMargin+40);
+    }
     if (state === "start"){
         background (0);
         text ("loading", pageMargin+30, pageMargin+40);
@@ -85,12 +97,19 @@ function draw() {
     
     // draw code lines
     if (state === "loadCodeLines"){ {
+        if (!startedSound){
+            screenTyping.loop ();
+            startedSound = true;
+        }
         drawCodeLines ();
         state = "drawCode";
+        
+        
     }
     }   
     // so that it only draws once after the code lines have been generated
    if (state === "drawCode") {
+    
     background (0);
     // background to make the loading disappear
     push ();
@@ -104,6 +123,7 @@ function draw() {
    }
 
 }
+
 
 // draw code lines
  function drawCodeLines () {
@@ -153,7 +173,11 @@ function draw() {
     } 
  }
  
-
+function mousePressed (){
+    if (state === "loading") {
+        state = "start";
+    }
+}
 
 
 
