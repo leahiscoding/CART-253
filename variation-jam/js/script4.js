@@ -51,7 +51,21 @@ function draw () {
 }
 // save image when 'a' key is pressed
 function keyPressed() {
-  if (key === 'a' || key === 'A' ) {
-    img.save();
+  if (key === 's' || key === 'S' ) {
+     html2canvas(document.querySelector("#ascii-div")).then(canvas => {
+    //canvas.id = "testCanvas"
+    //document.body.appendChild(canvas)
+    const dataURL = canvas.toDataURL('image/png');
+    // save the data into a canvas image file
+    // You can specify 'image/jpeg' or 'image/webp' for other formats
+    const link = document.createElement('a');
+    // create a tag to download the image
+    link.href = dataURL;
+    link.download = 'ascii.png'; 
+    link.click(); // Simulate a click on the link to trigger the download
+
+    
+
+    }); 
   }
 }

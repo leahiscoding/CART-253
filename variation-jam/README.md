@@ -38,7 +38,8 @@ This bit should attribute any code, assets or other elements used taken from oth
 > - https://www.gorillasun.de/blog/an-introduction-to-perlin-noise-in-p5js-and-processing/
 > - https://www.youtube.com/watch?v=3pI3SQjfVyA
 > - https://www.youtube.com/watch?v=jtseHw2Trw8
-
+> - https://freemusicarchive.org/music/Meydan/Ambient_1860/Freezing_but_warm/
+> - https://editor.p5js.org/p5/sketches/Sound:_Load_and_Play_Sound
 
 
 ## License

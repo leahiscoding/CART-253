@@ -10,40 +10,53 @@ let questions = [
     "what is your secret wish?"
 ];
 
+function preload() {
+    googleFont = loadFont('assets/Xanh_Mono/XanhMono-Regular.ttf');
+}
+
 // setup function
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    background(0);
     // shuffle questions array
     shuffle(questions, true);
+    textFont(googleFont);
+  
 
     // answerBox setup
     answerBox = createInput();
     answerBox.position(windowWidth / 2 - 150, windowHeight / 2);
-    answerBox.size(300, 100);
+    answerBox.size(300, 25);
+    answerBox.style("font-size", "14px");
+    answerBox.class ("xanh-mono-regular");
+    
 
     // submitButton setup
     submitButton = createButton("submit");
-    submitButton.size(50, 20);
-    submitButton.position(answerBox.x + answerBox.width / 2 - submitButton.width / 2, answerBox.y + 150);
+    submitButton.size(60, 20);
+    submitButton.class("xanh-mono-regular");
+    submitButton.position(answerBox.x + answerBox.width / 2 - submitButton.width / 2, answerBox.y + 80);
     submitButton.mousePressed(submitAnswer);
 }
 // draw function
 function draw() {
     background(0); // Black Background
     textSize(20);
-    fill(255);    
+    
+    
+    fill(0,255,0);    
     textAlign(CENTER, CENTER);
     // display based on current state
     if (currentState === "wish") {
-        text(questions[0], windowWidth / 2, windowHeight / 2 - 100);
-        // show input box and button
+        text(questions[0], windowWidth / 2, windowHeight / 2 - 50);
+        // show input box and button (html elements)
         answerBox.show();
         submitButton.show();
     } else if (currentState === "granted") {
         text("your wish is granted", windowWidth / 2, windowHeight / 2 - 100);
         textSize(12);
         text("press space to make another wish", windowWidth / 2, windowHeight / 2 + 100);
-        // hide input box and button
+        // hide input box and button (html elements)
         answerBox.hide();
         submitButton.hide();
     }
@@ -72,7 +85,13 @@ function keyPressed() {
         while (questions[0] === oldQuestions) {
             shuffle(questions, true);
         } 
-    }     
+
+    
+ 
+   
+    }
+
+    
 }
 
 // responsive canvas
