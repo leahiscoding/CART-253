@@ -13,12 +13,12 @@ let questions = [
     "what is your darkest desire?",
     "what is your secret wish?",
     "Which truth would you erase from your life?",
-    "What would you offerfor the life you dream of?",
+    "What would you offer for the life you dream of?",
     "What wish would you whisper to the stars?",
     "What do you desire more than anything else?",
     "What wish have you kept hidden from everyone?",
 ];
-
+// preload function for font and sound
 function preload() {
     googleFont = loadFont('assets/Xanh_Mono/XanhMono-Regular.ttf');
     musicPlay = loadSound('assets/sounds/desire.mp3');
@@ -73,9 +73,12 @@ function draw() {
         answerBox.show();
         submitButton.show();
     } else if (currentState === "granted") {
-        text("your wish is granted", windowWidth / 2, windowHeight / 2 - 100);
-        textSize(12);
-        text("press space to make another wish", windowWidth / 2, windowHeight / 2 + 100);
+        text("We have heard you. We are here with you. We listen to your wish.", windowWidth / 2, windowHeight / 2 - 50);
+        textSize(30);
+        text("Stay here with us. Forever and Ever.", windowWidth / 2, windowHeight / 2 + 50);
+        textSize(10);
+        text("Press SPACE to make another wish", windowWidth / 2, windowHeight / 2 + 300);
+
         // hide input box and button (html elements)
         answerBox.hide();
         submitButton.hide();
@@ -91,10 +94,10 @@ function submitAnswer() {
     // play sound
     if (!musicPlay.isPlaying()) {
         musicPlay.play();
-        musicPlay.setVolume(1.5);
+        musicPlay.setVolume(1.0);
     }
 }
-
+// mousePressed function
 function mousePressed() {
     // if click on answer box, clear text
     if (currentState === "wish" && mouseX > answerBox.x && mouseX < answerBox.x + answerBox.width &&
@@ -123,6 +126,7 @@ function keyPressed() {
  
    
     }
+    // press '2' to go to ether page
      if (key === '2' &&(currentState === "granted" || currentState === "wish")) {
     window.location.href = "ether.html";
   }
