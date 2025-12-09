@@ -4,6 +4,7 @@
 let currentState = "wish";
 let answerBox;
 let submitButton;
+let googleFont;
 
 // lines for questions array
 let questions = [
