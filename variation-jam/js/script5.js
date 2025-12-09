@@ -14,7 +14,7 @@ let questions = [
     "what is your secret wish?",
     "Which truth would you erase from your life?",
     "What would you offer for the life you dream of?",
-    "What wish would you whisper to the stars?",
+    "What wish would you whisper to the demons?",
     "What do you desire more than anything else?",
     "What wish have you kept hidden from everyone?",
 ];
