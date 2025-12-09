@@ -35,7 +35,7 @@ let fly = {
     x: 0,
     y: 0, 
     size: 20,
-    speed: 5
+    speed: 20
 }
 let flygroup = []; // array to hold multiple flies
 
@@ -46,19 +46,27 @@ let flyNumbers = 20; // total number of flies
 let kermitHit = 0; // number of times kermit got hit
 
 // Multimedia:
-let spacekermit1;
-let spacekermit2;
+let spacesnoopy;
+let spacesnoopy2;
+//let spacekermit1;
+//let spacekermit2;
 let laser;
 let asteroid;
 let space;
+let spacefont;
+let spacesound;
+let lasersound;
 
 // Preload multimedia
 function preload(){
-    spacekermit1 = loadImage ("assets/images/spacekermit1.webp");
-    spacekermit2 = loadImage ("assets/images/spacekermit2.webp");
+    spacesnoopy = loadImage ("assets/images/space.webp");
+    spacesnoopy2 = loadImage ("assets/images/spacesnoopy2.png");
     laser = loadImage ("assets/images/laser.png");
     asteroid = loadImage ("assets/images/asteroid.png");
-    space = loadImage ("assets/images/space.jpeg");
+    space = loadImage ("assets/images/spacewallpaper.avif");
+    spacefont = loadFont ("assets/quantum/quantrnd.ttf");
+    spacesound = loadSound ("assets/sounds/space.mp3");
+    lasersound = loadSound ("assets/sounds/laser.mp3");
 }
 
 
@@ -68,12 +76,12 @@ function setup() {
     imageMode(CENTER);
     startScreen();
     // initialize fly position
-    for (let flyCounter = 0; flyCounter < 10; flyCounter += 1){
+    for (let flyCounter = 0; flyCounter < 12; flyCounter += 1){
         flygroup.push({
             x: random (0, width),
             y: random (0 + frog.size/3, height),
             size: random (10,50),
-            speed: random (1, 4)
+            speed: random (1, 7)
         }); // add a new fly to the flygroup array
     }
 }
@@ -99,21 +107,23 @@ function startScreen () {
     background (0);
     image (space, width/2, height/2, width, height);
     textAlign (CENTER);
-    textFont('Courier New'); 
-    textStyle(BOLD);
+    textFont(spacefont); 
+    //textStyle(BOLD);
     fill("255");
     stroke(150);
     strokeWeight(5);
     textSize (49);
-    text ("Space Frog!Frog!Frog!", width/2, height/2-50);
+    text ("Snoopy Odyssey", width/2, height/2-50);
     textSize (16);
     text ("Press SPACE to start game", width/2, height/2+25);
-    image (spacekermit1, width/2+245, height/2 + 150, 300, 300); 
+    image (spacesnoopy, width/2+245, height/2 + 150, 300, 300); 
 }
 
 // Press space to start game
 function keyPressed() {
     if (gameState === "start" && key === " ") {
+        spacesound.loop();
+        spacesound.setVolume(0.5);
         gameState = "play";
         rocket.position = 0;
         rocket.x = frog.x;
@@ -127,9 +137,26 @@ function keyPressed() {
         rocket.position = 1; // set rocket position to moving
         return;
     }
+
+    if (gameState === "end" && key === " ") {
+        gameState = "start";
+        score = 0;
+        kermitHit = 0;
+        spacesound.stop();
+        // reset fly positions
+        for (let i = 0; i < flygroup.length; i++){
+            flygroup[i].x = random (0, width);
+            flygroup[i].y = random (0 + frog.size/3, height);
+        }
+        return;
+    }
+
+    // Navigation to other pages
       if (key === '3' &&(gameState === "start" || gameState === "play" || gameState === "end")) {
         window.location.href = "ether.html";
   }
+
+
 }
 
 //game screen
@@ -137,7 +164,7 @@ function gameScreen (){
     push();
     background (0);
     image (space, width/2, height/2, width, height);
-    fill("#66FF33");
+    fill("#ffffffff");
     drawRocket(); // draw the rocket
     drawFrog(); // draw the frog
     moveFrog(); // move the frog
@@ -167,7 +194,7 @@ function drawFrog(){
     fill("#66FF33");
     noStroke();
     //square (frog.x, frog.y, frog.size);
-    image (spacekermit2, frog.x, frog.y, frog.size, frog.size);
+    image (spacesnoopy2, frog.x, frog.y, frog.size, frog.size);
     pop();
     
 }
@@ -210,6 +237,8 @@ function shootRocket(){
 
     if (rocket.position === 1){
         rocket.y -= rocket.speed;
+        lasersound.play();
+        lasersound.setVolume(0.02);
     } // if rocket position is 1, rocket moves up
 
     if (rocket.y <= 0){
@@ -330,19 +359,19 @@ function endScreen () {
     background ("#000000");
     image (space, width/2, height/2, width, height);
     textAlign (CENTER);
-    textFont('Courier New');
+    textFont(spacefont);
     textStyle(BOLD);
     fill("255");
     stroke(150);
     strokeWeight(5);
-    textSize (49);
+    textSize (30);
     if (finishState === "win"){
-        text ("You Win!", width/2, height/2-50);
+        text ("Snoopy Went Home Safely!!", width/2, height/2-50);
     }
     else if (finishState === "lose"){
-        text ("You Lose!", width/2, height/2-50);
+        text ("Snoopy Got Lost in Space!", width/2, height/2-50);
     }
     textSize (16);
-    text ("Refresh to play again", width/2, height/2+25);
+    text ("Press SPACE to play again", width/2, height/2+25);
 }
 

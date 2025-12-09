@@ -43,6 +43,10 @@ This bit should attribute any code, assets or other elements used taken from oth
 > - https://pixabay.com/sound-effects/camera-shutter-314056/
 > - https://editor.p5js.org/ywang@gsadigitalculture.com/sketches/uczPqdDlp
 > - https://freemusicarchive.org/music/mark-lingard/dark-ambience/soon-i-used-to-be-here-now-dark-ambience/
+> - https://www.nasa.gov/stem-content/new-education-resources-peanuts-and-nasa-a-50th-anniversary-celebration/
+> - https://www.pngaaa.com/detail/502740
+> - https://pixabay.com/sound-effects/laser-shot-ingame-230500/
+> - https://pixabay.com/sound-effects/space-72679/
 
 
 
