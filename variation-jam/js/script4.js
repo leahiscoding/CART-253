@@ -76,7 +76,7 @@ function keyPressed() {
 
     }); 
   }
-  if (key === 'r' || key === 'R' ) {
+  if (key === '1' ) {
     window.location.href = "ether.html";
   }
 }

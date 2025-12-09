@@ -41,6 +41,8 @@ This bit should attribute any code, assets or other elements used taken from oth
 > - https://freemusicarchive.org/music/Meydan/Ambient_1860/Freezing_but_warm/
 > - https://editor.p5js.org/p5/sketches/Sound:_Load_and_Play_Sound
 > - https://pixabay.com/sound-effects/camera-shutter-314056/
+> - https://editor.p5js.org/ywang@gsadigitalculture.com/sketches/uczPqdDlp
+> - https://freemusicarchive.org/music/mark-lingard/dark-ambience/soon-i-used-to-be-here-now-dark-ambience/
 
 
 

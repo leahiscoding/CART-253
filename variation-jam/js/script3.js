@@ -97,7 +97,18 @@ function mousePressed() {
     }
 
 
- 
+ function keyPressed(){
+    if (key === '1'){
+        window.location.href = "screen.html";
+    }
+    if (key === '2'){
+        window.location.href = "text.html";
+    }
+    if (key === '3'){
+        window.location.href = "last.html";
+    }
+
+ }
 // responsive canvas
 function reportWindowSize() {
   }

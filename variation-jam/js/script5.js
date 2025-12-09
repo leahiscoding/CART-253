@@ -5,16 +5,23 @@ let currentState = "wish";
 let answerBox;
 let submitButton;
 let googleFont;
+let musicPlay;
 
 // lines for questions array
 let questions = [
     "what is your deepest desire?",
     "what is your darkest desire?",
-    "what is your secret wish?"
+    "what is your secret wish?",
+    "Which truth would you erase from your life?",
+    "What would you offerfor the life you dream of?",
+    "What wish would you whisper to the stars?",
+    "What do you desire more than anything else?",
+    "What wish have you kept hidden from everyone?",
 ];
 
 function preload() {
     googleFont = loadFont('assets/Xanh_Mono/XanhMono-Regular.ttf');
+    musicPlay = loadSound('assets/sounds/desire.mp3');
 }
 
 // setup function
@@ -28,9 +35,12 @@ function setup() {
 
     // answerBox setup
     answerBox = createInput();
-    answerBox.position(windowWidth / 2 - 150, windowHeight / 2);
-    answerBox.size(300, 25);
+    answerBox.position(windowWidth / 2 - 200, windowHeight / 2);
+    answerBox.size(400, 25);
     answerBox.style("font-size", "14px");
+    answerBox.style("color", "white");
+    answerBox.style("border", "2px solid green");
+    answerBox.style("background", "black");
     answerBox.class ("xanh-mono-regular");
     
 
@@ -38,13 +48,20 @@ function setup() {
     submitButton = createButton("submit");
     submitButton.size(60, 20);
     submitButton.class("xanh-mono-regular");
-    submitButton.position(answerBox.x + answerBox.width / 2 - submitButton.width / 2, answerBox.y + 80);
+    submitButton.style("font-size", "14px");
+    submitButton.style("color", "green");
+    submitButton.style("border", "0.5px solid green");
+    submitButton.style("background", "black");
+    submitButton.position(answerBox.x + answerBox.width / 2 - submitButton.width / 2, answerBox.y + 70);
     submitButton.mousePressed(submitAnswer);
 }
+
+    
+
 // draw function
 function draw() {
-    background(0); // Black Background
-    textSize(20);
+    background(random(0)); // Black Background
+    textSize(30);
     
     
     fill(0,255,0);    
@@ -71,6 +88,19 @@ function submitAnswer() {
     if (currentInput !== "") {
         currentState = "granted";
     }
+    // play sound
+    if (!musicPlay.isPlaying()) {
+        musicPlay.play();
+        musicPlay.setVolume(1.5);
+    }
+}
+
+function mousePressed() {
+    // if click on answer box, clear text
+    if (currentState === "wish" && mouseX > answerBox.x && mouseX < answerBox.x + answerBox.width &&
+        mouseY > answerBox.y && mouseY < answerBox.y + answerBox.height) {
+        answerBox.value("");
+    }
 }
 // keyPressed function
 function keyPressed() {
@@ -93,7 +123,9 @@ function keyPressed() {
  
    
     }
-
+     if (key === '2' &&(currentState === "granted" || currentState === "wish")) {
+    window.location.href = "ether.html";
+  }
     
 }
 

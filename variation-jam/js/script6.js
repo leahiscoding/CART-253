@@ -127,7 +127,9 @@ function keyPressed() {
         rocket.position = 1; // set rocket position to moving
         return;
     }
-    
+      if (key === '3' &&(gameState === "start" || gameState === "play" || gameState === "end")) {
+        window.location.href = "ether.html";
+  }
 }
 
 //game screen
