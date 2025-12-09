@@ -71,15 +71,15 @@ function draw() {
         textAlign (LEFT, TOP);
         fill (0,255,0); 
         textFont (codeFont);
-        text ("press to load environment", pageMargin+30, pageMargin+40);
+        text ("press to load environment", pageMargin+30, pageMargin+20);
     }
     if (state === "start"){
         background (0);
-        text ("loading", pageMargin+30, pageMargin+40);
+        text ("loading", pageMargin+30, pageMargin+20);
         textSize (20);
         textFont (codeFont);
         fill (0,255,0); 
-        text (ellipses,pageMargin+110, pageMargin+40);
+        text (ellipses,pageMargin+110, pageMargin+20);
         // make dots animate
         if (frameCount % 15 === 0){
             if (ellipses.length < 3){
